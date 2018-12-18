@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Spatie\MediaLibrary\Media;
+use Auth;
 
 class Admin extends Authenticatable implements HasMedia
 {
@@ -38,14 +39,17 @@ class Admin extends Authenticatable implements HasMedia
 
     static function hasRoles()
     {
-        $admin = \Auth::guard('admin')->user();
+
+        $admin = Auth::guard('admin')->user();
         $roles =  $admin->getRoleNames();
 
         $data = (object)array();
-        foreach ($roles as $name){
-            $role = Role::findByName($name,'admin');
-            $data->ids[] = $role->id;
-            $data->roles[$role->id] = $role;
+        if($roles){
+            foreach ($roles as $name){
+                $role = Role::findByName($name,'admin');
+                $data->ids[] = $role->id;
+                $data->roles[$role->id] = $role;
+            }
         }
 
         return $data;

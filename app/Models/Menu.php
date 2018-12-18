@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\RoleHasMenus;
 use DB;
+use Auth;
 
 class Menu extends Model
 {
@@ -26,16 +26,6 @@ class Menu extends Model
 
     }
 
-    /**
-     * 是否包含某个角色。
-     */
-    public function hasRole($role){
-        if($role->id){
-            $roleHasMenu = new RoleHasMenus();
-            return $roleHasMenu->where('role_id',$role->id)->where('menu_id',$this->id)->count();
-        }
-        return false;
-    }
 
     /*
     * 获取菜单数据
@@ -66,7 +56,7 @@ class Menu extends Model
 
 
     /*
-    * 排序子菜单并缓存
+    * 排序子菜单
     */
     public function sortMenuSetCache()
     {
@@ -91,14 +81,18 @@ class Menu extends Model
     */
     public function sidebarMenu()
     {
-        $hasRoles = Admin::hasRoles();
-        $hasMenu = RoleHasMenus::getMenusByRoles($hasRoles->ids);
 
-        $admin = \Auth::guard('admin')->user();
+        $menus = [];
+        $admin = Auth::guard('admin')->user();
         if($admin->id == 1){
             $menus = $this->orderBy('order','asc')->get()->toArray();
         }else{
-            $menus = $this->whereIn('id',$hasMenu)->orderBy('order','asc')->get()->toArray();
+
+            $hasRoles = Admin::hasRoles();
+            if(!empty($hasRoles->ids)){
+                $hasMenu = RoleHasMenus::getMenusByRoles($hasRoles->ids);
+                $menus = $this->whereIn('id',$hasMenu)->orderBy('order','asc')->get()->toArray();
+            }
         }
 
         if ($menus) {

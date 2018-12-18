@@ -28,12 +28,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'permission5 articles','guard_name' => 'admin']);
 
         // 创建角色并赋予已创建的权限
-//        $role = Role::create(['name' => 'writer','guard_name' => 'admin']);
-//        $role->givePermissionTo('edit articles');
-//        $role->givePermissionTo('delete articles');
-//
-//        $role = Role::create(['name' => 'admin','guard_name' => 'admin']);
-//        $role->givePermissionTo('publish articles');
-//        $role->givePermissionTo('unpublish articles');
+        $role = Role::create(['name' => 'adminer','guard_name' => 'admin']);
+        $role->givePermissionTo('publish articles');
+        $role->givePermissionTo('unpublish articles');
+
+        $role = Role::create(['name' => 'writer','guard_name' => 'admin']);
+        $role->givePermissionTo('edit articles');
+        $role->givePermissionTo('delete articles');
+
     }
 }
