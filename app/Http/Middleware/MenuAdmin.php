@@ -29,7 +29,7 @@ class MenuAdmin
     public function makeSidebarMenu(){
 
         $menus = new Menus();
-        $items = $menus->getMenuList();
+        $items = $menus->sidebarMenu();
         $menu = Menu::build($items, function ($menu, $item) {
 
             //判断是否选中

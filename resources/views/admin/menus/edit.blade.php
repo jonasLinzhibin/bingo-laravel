@@ -25,7 +25,7 @@
                                 <div class="box box-solid box-default no-margin">
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        {{$data['id']}}
+                                        {{$data->id}}
                                     </div>
                                     <!-- /.box-body -->
                                 </div>
@@ -57,7 +57,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                    <input type="text" id="title" name="title" value="{{$data['title']}}" class="form-control" placeholder="">
+                                    <input type="text" id="title" name="title" value="{{$data->title}}" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                             <label for="icon" class="col-sm-2  control-label">图标</label>
                             <div class="col-sm-8">
                                 <div class="input-group iconpicker-container">
-                                    <span class="input-group-addon"><i class="fa fa-bars"></i></span>
-                                    <input type="text" id="icon" name="icon" value="fa-bars" class="form-control js-iconpicker" placeholder="" style="width: 140px;">
+                                    <span class="input-group-addon"><i class="fa @if(empty($data->icon)) fa-bars @else {{$data->icon}} @endif"></i></span>
+                                    <input type="text" id="icon" name="icon" value="@if(empty($data->icon)) fa-bars @else{{$data->icon}}@endif" class="form-control js-iconpicker" placeholder="" style="width: 140px;">
                                 </div>
                                 <span class="help-block">
                                         <i class="fa fa-info-circle"></i>&nbsp;For more icons please see
@@ -82,7 +82,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                    <input type="text" id="uri" name="uri" value="{{old('uri')}}" class="form-control" placeholder="">
+                                    <input type="text" id="uri" name="uri" value="@if(!empty($data->uri)){{$data->uri}}@endif" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -91,6 +91,13 @@
                             <div class="col-sm-8">
                                 <select class="form-control js-select2 " name="roles[]" multiple="" data-placeholder="" data-value="" tabindex="-1" aria-hidden="true">
                                     @foreach($roles as $role)
+
+                                        @if(!empty($data->uri))
+                                            {{$data->uri}}
+                                            @else
+
+                                        @endif
+
                                         <option value="{{$role['id']}}">{{$role['name']}}</option>
                                     @endforeach
                                 </select>

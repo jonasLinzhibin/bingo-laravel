@@ -36,18 +36,19 @@ class Admin extends Authenticatable implements HasMedia
     ];
 
 
-    static function myRoles()
+    static function hasRoles()
     {
         $admin = \Auth::guard('admin')->user();
         $roles =  $admin->getRoleNames();
 
-        $role_list = [];
+        $data = (object)array();
         foreach ($roles as $name){
             $role = Role::findByName($name,'admin');
-            $role_list[] = $role->id;
+            $data->ids[] = $role->id;
+            $data->roles[$role->id] = $role;
         }
 
-        return $role_list;
+        return $data;
 
     }
 

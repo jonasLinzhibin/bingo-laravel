@@ -62,7 +62,10 @@ class MenusController extends Controller
         $roles = Role::all();
         $menu = new Menus();
         $menus = $menu->getMenuList();
-        return view('admin.menus.edit',compact(['data','menus','roles']));
+
+        $hasRoles = Admin::hasRoles();
+
+        return view('admin.menus.edit',compact(['data','menus','roles','hasRoles']));
     }
     /**
      * Update the specified resource in storage.

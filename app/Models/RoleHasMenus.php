@@ -12,6 +12,6 @@ class RoleHasMenus extends Model
     */
     static function getMenusByRoles($ids)
     {
-        return self::whereIn('role_id',$ids)->pluck('role_id');
+        return self::whereIn('role_id',$ids)->pluck('menus_id');
     }
 }

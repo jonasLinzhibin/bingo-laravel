@@ -49,7 +49,7 @@ class RolesController extends Controller
             'guard_name' => 'required|min:2',
             'permissions' =>'required',
         ]);
-        $input = $request->except(['permissions']);
+        $input = $request->except(['permissions','s']);
         $permissions = $request['permissions'];
 
         $role = new Role();

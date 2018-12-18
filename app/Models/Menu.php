@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RoleHasMenus;
 use DB;
 
 class Menu extends Model
@@ -23,6 +24,17 @@ class Menu extends Model
     public function roles(){
         return $this->belongsToMany($this, 'role_has_menus', 'menus_id', 'role_id');
 
+    }
+
+    /**
+     * 是否包含某个角色。
+     */
+    public function hasRole($role){
+        if($role->id){
+            $roleHasMenu = new RoleHasMenus();
+            return $roleHasMenu->where('role_id',$role->id)->where('menu_id',$this->id)->count();
+        }
+        return false;
     }
 
     /*
@@ -58,10 +70,6 @@ class Menu extends Model
     */
     public function sortMenuSetCache()
     {
-        $role_ids = Admin::myRoles();
-        $all = RoleHasMenus::getMenusByRoles($role_ids);
-
-
         $menus = $this->orderBy('order','asc')->get()->toArray();
         if ($menus) {
             $menuList = $this->sortMenu($menus);
@@ -76,6 +84,35 @@ class Menu extends Model
         return [];
     }
 
+
+
+    /*
+    * 获取左边菜单
+    */
+    public function sidebarMenu()
+    {
+        $hasRoles = Admin::hasRoles();
+        $hasMenu = RoleHasMenus::getMenusByRoles($hasRoles->ids);
+
+        $admin = \Auth::guard('admin')->user();
+        if($admin->id == 1){
+            $menus = $this->orderBy('order','asc')->get()->toArray();
+        }else{
+            $menus = $this->whereIn('id',$hasMenu)->orderBy('order','asc')->get()->toArray();
+        }
+
+        if ($menus) {
+            $menuList = $this->sortMenu($menus);
+            foreach ($menuList as $key => $value) {
+                if ($value['child']) {
+                    $sort = array_column($value['child'], 'order');
+                    array_multisort($sort,SORT_ASC,$value['child']);
+                }
+            }
+            return $menuList;
+        }
+        return [];
+    }
 
     //同时更新多个记录，参数，表名，数组（别忘了在一开始use DB;）
     public function updateBatch($multipleData = array(), $tableName = ""){
