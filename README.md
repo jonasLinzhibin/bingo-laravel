@@ -14,14 +14,14 @@ location / {
 ```
 
 
-
-
-# 扩展包
-- laravel-permission
-- laravel-menu
-
-# 功能
+# 实现功能
 - 权限管理
 - 菜单生成
 - 文件管理
+
+
+
+# 相关扩展包
+- laravel-permission
+- laravel-menu
 
