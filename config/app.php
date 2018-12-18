@@ -182,6 +182,7 @@ return [
         AetherUpload\AetherUploadServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
+        Akaunting\Setting\Provider::class,
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Setting' => Akaunting\Setting\Facade::class,
     ],
 
 ];
