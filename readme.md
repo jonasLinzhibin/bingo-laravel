@@ -14,6 +14,10 @@ location / {
 ```
 
 
+# 安装说明
+- 运行composer update
+- 运行cmpn install 或者 npm install
+
 # 实现功能
 - 权限管理
 - 菜单生成
