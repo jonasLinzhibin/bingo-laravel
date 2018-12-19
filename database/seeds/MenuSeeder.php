@@ -30,6 +30,5 @@ class MenuSeeder extends Seeder
         $parent_id = $medias->id;
         Menu::create(['title' => '配置列表','uri' => '/admin/config','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
 
-
     }
 }

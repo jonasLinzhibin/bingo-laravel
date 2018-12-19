@@ -180,7 +180,6 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
         AetherUpload\AetherUploadServiceProvider::class,
-        Cmgmyr\Messenger\MessengerServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Akaunting\Setting\Provider::class,
     ],

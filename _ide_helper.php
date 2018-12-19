@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.44 on 2018-12-19 07:12:03.
+ * Generated for Laravel 5.5.44 on 2018-12-19 13:33:37.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16,17 +16,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static string version()
-     * @method static string basePath()
-     * @method static string environment()
-     * @method static bool isDownForMaintenance()
-     * @method static void registerConfiguredProviders()
-     * @method static \Illuminate\Support\ServiceProvider register(\Illuminate\Support\ServiceProvider|string $provider, array $options = [], bool $force = false)
-     * @method static void registerDeferredProvider(string $provider, string $service = null)
-     * @method static void boot()
-     * @method static void booting(mixed $callback)
-     * @method static void booted(mixed $callback)
-     * @method static string getCachedServicesPath()
      * @see \Illuminate\Foundation\Application
      */ 
     class App {
@@ -1367,11 +1356,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static int handle(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output = null)
-     * @method static int call(string $command, array $parameters = [], $outputBuffer = null)
-     * @method static int queue(string $command, array $parameters = [])
-     * @method static array all()
-     * @method static string output()
      * @see \Illuminate\Contracts\Console\Kernel
      */ 
     class Artisan {
@@ -1514,21 +1498,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static mixed guard(string|null $name = null)
-     * @method static void shouldUse(string $name);
-     * @method static bool check()
-     * @method static bool guest()
-     * @method static \Illuminate\Contracts\Auth\Authenticatable|null user()
-     * @method static int|null id()
-     * @method static bool validate(array $credentials = [])
-     * @method static void setUser(\Illuminate\Contracts\Auth\Authenticatable $user)
-     * @method static bool attempt(array $credentials = [], bool $remember = false)
-     * @method static bool once(array $credentials = [])
-     * @method static void login(\Illuminate\Contracts\Auth\Authenticatable $user, bool $remember = false)
-     * @method static \Illuminate\Contracts\Auth\Authenticatable loginUsingId(mixed $id, bool $remember = false)
-     * @method static bool onceUsingId(mixed $id)
-     * @method static bool viaRemember()
-     * @method static void logout()
      * @see \Illuminate\Auth\AuthManager
      * @see \Illuminate\Contracts\Auth\Factory
      * @see \Illuminate\Contracts\Auth\Guard
@@ -9254,7 +9223,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function validate($rules, $params = null)
         {
-            return \Illuminate\Http\Request::Illuminate\Foundation\Providers\{closure}($rules, $params);
+            return \Illuminate\Http\Request::validate($rules, $params);
         }
          
     }
@@ -9485,28 +9454,13 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Support\Facades\Route get(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route post(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route put(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route delete(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route patch(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route options(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route any(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route match(array|string $methods, string $uri, \Closure|array|string|null $action = null)
      * @method static \Illuminate\Support\Facades\Route prefix(string  $prefix)
-     * @method static \Illuminate\Routing\PendingResourceRegistration resource(string $name, string $controller, array $options = [])
-     * @method static \Illuminate\Routing\PendingResourceRegistration apiResource(string $name, string $controller, array $options = [])
      * @method static \Illuminate\Support\Facades\Route middleware(array|string|null $middleware)
-     * @method static \Illuminate\Support\Facades\Route substituteBindings(\Illuminate\Support\Facades\Route $route)
-     * @method static void substituteImplicitBindings(\Illuminate\Support\Facades\Route $route)
      * @method static \Illuminate\Support\Facades\Route as(string $value)
      * @method static \Illuminate\Support\Facades\Route domain(string $value)
      * @method static \Illuminate\Support\Facades\Route name(string $value)
      * @method static \Illuminate\Support\Facades\Route namespace(string $value)
      * @method static \Illuminate\Support\Facades\Route where(array|string $name, string $expression = null)
-     * @method static \Illuminate\Routing\Router group(\Closure|string|array $value, \Closure|string $routes)
-     * @method static \Illuminate\Support\Facades\Route redirect(string $uri, string $destination, int $status = 301)
-     * @method static \Illuminate\Support\Facades\Route view(string $uri, string $view, array $data = [])
      * @see \Illuminate\Routing\Router
      */ 
     class Route {
@@ -10296,10 +10250,6 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Database\Schema\Builder create(string $table, \Closure $callback)
-     * @method static \Illuminate\Database\Schema\Builder drop(string $table)
-     * @method static \Illuminate\Database\Schema\Builder dropIfExists(string $table)
-     * @method static \Illuminate\Database\Schema\Builder table(string $table, \Closure $callback)
      * @see \Illuminate\Database\Schema\Builder
      */ 
     class Schema {
