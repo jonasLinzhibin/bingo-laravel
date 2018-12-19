@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('permissions','Admin\PermissionsController');
         Route::resource('users','Admin\UsersController');
         Route::resource('medias','Admin\MediasController');
+        Route::resource('config','Admin\SettingsController');
 
         Route::get('menus', 'Admin\MenusController@index')->name('menus.index');
         Route::post('menus/store', 'Admin\MenusController@store')->name('menus.store');
