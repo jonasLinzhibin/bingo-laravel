@@ -21,11 +21,17 @@ class MenuAdmin
 
             $menu = $this->makeSidebarMenu();
             view()->share('sidebarMenu',$menu);
+
+            $breadcrumbs = $this->makeBreadcrumbs();
+            view()->share('breadCrumbs',$breadcrumbs);
         }
 
         return $next($request);
     }
 
+    /**
+     * 生成左侧菜单
+     */
     public function makeSidebarMenu(){
 
         $menus = new Menus();
@@ -76,12 +82,63 @@ class MenuAdmin
 
             }
 
+        });
+
+        return $menu->render();
+    }
+
+    /**
+     * 生成面包屑菜单
+     */
+    public function makeBreadcrumbs(){
+
+        $menus = new Menus();
+        $items = $menus->sidebarMenu();
+
+        $nav = Menu::build($items, function ($menu, $item) {
+
+                $menu->addClass('breadcrumb');
+
+                if(!empty($item['child'])){
+
+                    foreach ($item['child'] as $key => $sub){
+                        if(strstr(app('request')->url(),$sub['uri'])){
+
+                            //添加页面标题
+                            $pageTitle = '<h1>    '.$item['title'].'    <small></small>    </h1>';
+                            $menu->prepend($pageTitle);
+                            //添加菜单
+                            $header = '<i class="fa '.$item['icon'].'"></i> '.$item['title'];
+                            $menu->link($item['uri'],$header);
+                            //添加子菜单
+                            $title_icon = '<i class="fa '.$sub['icon'].'"></i> '.$sub['title'];
+                            $title = $sub['icon'] ? $title_icon : $sub['title'] ;
+                            $title = $sub['title'] ;
+
+                            $menu->link($sub['uri'],$title);
+                        }
+                    }
+
+
+                }else{
+
+                    if(strstr(app('request')->url(),$item['uri'])){
+                        //添加页面标题
+                        $pageTitle = '<h1>    '.$item['title'].'    <small></small>    </h1>';
+                        $menu->prepend($pageTitle);
+                        //添加菜单
+                        $title = '<i class="fa '.$item['icon'].'"></i> '.$item['title'];
+                        $menu->link($item['uri'],$title);
+                    }
+
+                }
 
 
         });
 
 
-
-        return $menu->render();
+        return $nav->render();
     }
+
+
 }
