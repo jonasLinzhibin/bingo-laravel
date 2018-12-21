@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //后台路由组
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['auth.admin','auth.menu']], function () {
-        Route::get('/dashboard', 'Admin\DashboardController@index');
+        Route::get('dashboard', 'Admin\DashboardController@index');
         Route::resource('admins','Admin\AdminsController');
         Route::resource('roles','Admin\RolesController');
         Route::resource('permissions','Admin\PermissionsController');
@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('medias','Admin\MediasController');
         Route::resource('config','Admin\SettingsController');
         Route::resource('message','Admin\MessagesController');
+        Route::resource('blogs','Admin\BlogsController');
+        Route::resource('comments','Admin\CommentsController');
 
         Route::get('menus', 'Admin\MenusController@index')->name('menus.index');
         Route::post('menus/store', 'Admin\MenusController@store')->name('menus.store');
