@@ -16,8 +16,9 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $blog = new Blog();
-        $comments = $blog->comments()->orderBy('created_at', 'desc')->paginate(10);
+        $comments = Comment::with('blog')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('admin.comments.index',compact('comments'));
     }
 

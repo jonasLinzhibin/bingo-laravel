@@ -14,6 +14,7 @@
                         <tr>
                             <th>ID</th>
                             <th>文章标题</th>
+                            <th>评论内容</th>
                             <th>创建日期</th>
                             <th>更新日期</th>
                             <th>操作</th>
@@ -21,7 +22,8 @@
                         @foreach($comments as $comment)
                             <tr>
                                 <td>{{$comment->id}}</td>
-                                <td>{{$comment->title}}</td>
+                                <td>{{$comment->blog->title}}</td>
+                                <td>{{$comment->content}}</td>
                                 <td>{{$comment->created_at}}</td>
                                 <td>{{$comment->updated_at}}</td>
                                 <td>
