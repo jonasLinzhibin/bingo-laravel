@@ -27,11 +27,21 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('roles','Admin\RolesController');
         Route::resource('permissions','Admin\PermissionsController');
         Route::resource('users','Admin\UsersController');
-        Route::resource('medias','Admin\MediasController');
         Route::resource('config','Admin\SettingsController');
         Route::resource('message','Admin\MessagesController');
-        Route::resource('blogs','Admin\BlogsController');
-        Route::resource('comments','Admin\CommentsController');
+
+        Route::resource('medias','Admin\MediasController');
+
+        Route::post('posts/category/sort', 'Admin\PostsCategoryController@sort')->name('category.sort');
+        Route::post('posts/category/del/{id}', 'Admin\PostsCategoryController@del')->name('category.del');
+        Route::resource('posts/category','Admin\PostsCategoryController');
+
+        Route::resource('posts/setting','Admin\PostsSettingController');
+        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
+        Route::get('posts/trash', 'Admin\PostsController@trash')->name('posts.trash');
+        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
+        Route::resource('posts/comments','Admin\PostsCommentsController');
+        Route::resource('posts','Admin\PostsController');
 
         Route::get('menus', 'Admin\MenusController@index')->name('menus.index');
         Route::post('menus/store', 'Admin\MenusController@store')->name('menus.store');

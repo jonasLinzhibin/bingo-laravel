@@ -7,55 +7,45 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">添加配置</h3>
+                    <h3 class="box-title">添加文章</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('config.store') }}" method="post" class="form-horizontal">
+                <form action="{{ route('posts.create') }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="key" value="{{ old('key') }}" >
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置值</label>
+                            <label for="" class="col-sm-2 control-label">标题</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="value" value="{{ old('value') }}" >
+                                <input type="text" class="form-control" name="title" value="{{ old('title') }}" >
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置描述</label>
+                            <label for="" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="description" value="{{ old('description') }}" >
+                                <textarea name="content" class="form-control"  cols="30" rows="10">{{ old('content') }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">状态</label>
-
                             <div class="col-sm-10">
-                                <input type="radio" name="status" value="0" checked>正常
-                                <input type="radio" name="status" value="1">锁定
+                                <input type="radio" name="audit" value="0" checked>待审核
+                                <input type="radio" name="audit" value="1">已审核
+                                <input type="radio" name="audit" value="2">不通过
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-info">保存</button>
-                                {{--<button type="reset" class="btn btn-default">重置</button>--}}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
-                {{--<div class="box-footer">--}}
-                {{--<button type="reset" class="btn btn-default">重置</button>--}}
-                {{--<button type="submit" class="btn btn-info pull-right">保存</button>--}}
-                {{--</div>--}}
+
                 <!-- /.box-footer -->
                 </form>
             </div>

@@ -14,7 +14,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{route('menus.update',$data)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{{route('menus.update',$menu)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
                     {{ method_field('POST') }}
@@ -25,7 +25,7 @@
                                 <div class="box box-solid box-default no-margin">
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                        {{$data->id}}
+                                        {{$menu->id}}
                                     </div>
                                     <!-- /.box-body -->
                                 </div>
@@ -41,10 +41,10 @@
                                 <select class="form-control js-select2" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                     <option value="0">顶级菜单</option>
                                     @foreach($menus as $item)
-                                        <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                        <option value="{{$item['id']}}" @if($menu->parent_id == $item['id'])   selected @endif>{{$item['title']}}</option>
                                         @if(!empty($item['child']))
                                             @foreach($item['child'] as $child)
-                                                <option value="{{$child['id']}}">一一{{$child['title']}}</option>
+                                                <option value="{{$child['id']}}" @if($menu->parent_id == $child)   selected @endif>一一{{$child['title']}}</option>
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -57,7 +57,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                    <input type="text" id="title" name="title" value="{{$data->title}}" class="form-control" placeholder="">
+                                    <input type="text" id="title" name="title" value="{{$menu->title}}" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                             <label for="icon" class="col-sm-2  control-label">图标</label>
                             <div class="col-sm-8">
                                 <div class="input-group iconpicker-container">
-                                    <span class="input-group-addon"><i class="fa @if(empty($data->icon)) fa-bars @else {{$data->icon}} @endif"></i></span>
-                                    <input type="text" id="icon" name="icon" value="@if(empty($data->icon)) fa-bars @else{{$data->icon}}@endif" class="form-control js-iconpicker" placeholder="" style="width: 140px;">
+                                    <span class="input-group-addon"><i class="fa @if(empty($menu->icon)) fa-bars @else {{$menu->icon}} @endif"></i></span>
+                                    <input type="text" id="icon" name="icon" value="@if(empty($menu->icon)) fa-bars @else{{$menu->icon}}@endif" class="form-control js-iconpicker" placeholder="" style="width: 140px;">
                                 </div>
                                 <span class="help-block">
                                         <i class="fa fa-info-circle"></i>&nbsp;For more icons please see
@@ -82,7 +82,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                    <input type="text" id="uri" name="uri" value="@if(!empty($data->uri)){{$data->uri}}@endif" class="form-control" placeholder="">
+                                    <input type="text" id="uri" name="uri" value="@if(!empty($menu->uri)){{$menu->uri}}@endif" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -92,8 +92,8 @@
                                 <select class="form-control js-select2 " name="roles[]" multiple="" data-placeholder="" data-value="" tabindex="-1" aria-hidden="true">
                                     @foreach($roles as $role)
 
-                                        @if(!empty($data->uri))
-                                            {{$data->uri}}
+                                        @if(!empty($menu->uri))
+                                            {{$menu->uri}}
                                             @else
 
                                         @endif

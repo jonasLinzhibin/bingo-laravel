@@ -7,56 +7,58 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">添加配置</h3>
+                    <h3 class="box-title">配置</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('config.store') }}" method="post" class="form-horizontal">
+                <form action="{{ route('setting.store') }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="key" value="{{ old('key') }}" >
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置值</label>
+                            <label for="" class="col-sm-2 control-label">前台发布审核</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="value" value="{{ old('value') }}" >
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">配置描述</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="description" value="{{ old('description') }}" >
+                                <input type="radio" name="need_audit" value="0" checked>不需要
+                                <input type="radio" name="need_audit" value="1">需要
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">状态</label>
-
+                            <label for="" class="col-sm-2 control-label">是否允许评论</label>
                             <div class="col-sm-10">
-                                <input type="radio" name="status" value="0" checked>正常
-                                <input type="radio" name="status" value="1">锁定
+                                <input type="radio" name="allow_comment" value="0" checked>不允许
+                                <input type="radio" name="allow_comment" value="1">允许
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">文章类型</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="post_type" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">类型名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="post_name" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">排序</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="sort" value="{{old('sort',50)}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-info">保存</button>
-                                {{--<button type="reset" class="btn btn-default">重置</button>--}}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
-                {{--<div class="box-footer">--}}
-                {{--<button type="reset" class="btn btn-default">重置</button>--}}
-                {{--<button type="submit" class="btn btn-info pull-right">保存</button>--}}
-                {{--</div>--}}
-                <!-- /.box-footer -->
+
+                    <!-- /.box-footer -->
                 </form>
             </div>
             <!-- /.box -->

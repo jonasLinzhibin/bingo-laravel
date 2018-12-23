@@ -19,8 +19,10 @@
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
-                            <th>名称</th>
-                            <th>值</th>
+                            <th>配置名</th>
+                            <th>配置值</th>
+                            <th>描述</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                         @foreach($items as $item)
@@ -28,15 +30,28 @@
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->key}}</td>
                                 <td>{{$item->value}}</td>
+                                <td>{{$item->description}}</td>
+                                <td>
+                                    @if($item->status)
+                                        <span class="label label-default">锁定</span>
+                                    @else
+                                        <span class="label label-success">正常</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{route('config.edit',$item)}}" class="btn btn-info">修改</a>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <form action="{{route('config.destroy',$item)}}" method="post">
-                                            {{csrf_field()}}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger">删除</button>
-                                        </form>
-                                    </div>
+
+                                    @if($item->status)
+                                    @else
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <form action="{{route('config.destroy',$item)}}" method="post">
+                                                {{csrf_field()}}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-danger">删除</button>
+                                            </form>
+                                        </div>
+
+                                    @endif
 
                                 </td>
                             </tr>

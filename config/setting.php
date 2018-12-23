@@ -38,6 +38,8 @@ return [
         'table'         => 'settings',
         'key'           => 'key',
         'value'         => 'value',
+        'description'   => 'description',
+        'status'        => 'status',
     ],
 
     /*

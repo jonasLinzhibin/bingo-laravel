@@ -58,14 +58,14 @@ class MenusController extends Controller
      */
     public function edit($id)
     {
-        $data = Menus::findOrFail($id);
         $roles = Role::all();
         $menu = new Menus();
         $menus = $menu->getMenuList();
 
         $hasRoles = Admin::hasRoles();
+        $menu = Menus::findOrFail($id);
 
-        return view('admin.menus.edit',compact(['data','menus','roles','hasRoles']));
+        return view('admin.menus.edit',compact(['menu','menus','roles','hasRoles']));
     }
     /**
      * Update the specified resource in storage.
@@ -133,19 +133,14 @@ class MenusController extends Controller
             $data[] = [
                 'id'=>$item['id'],
                 'order'=>$num++,
-            ];
-            $parent[] = [
-                'id'=>$item['id'],
                 'parent_id'=>0,
             ];
+
             if(isset($item['children'])){
                 foreach ($item['children'] as $item2) {
                     $data[] = [
                         'id' => $item2['id'],
                         'order' => $num++,
-                    ];
-                    $parent[] = [
-                        'id' => $item2['id'],
                         'parent_id'=>$item['id'],
                     ];
                 }
@@ -153,10 +148,9 @@ class MenusController extends Controller
         }
 
         $menu = new Menus();
-        $res = $menu->updateBatch($data,'bg_menus');
-        $res2 = $menu->updateBatch($parent,'bg_menus');
+        $res = $menu->updateBatch($data);
 
-        if($res !==false && $res2 !== false ){
+        if($res !==false){
             return ['status'=>'success','msg'=>'保存成功','uri'=>route('menus.index')];
         }else{
             return ['status'=>'danger','msg'=>'保存失败'];

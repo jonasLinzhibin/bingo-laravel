@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Post;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Blog extends Model
+class Posts extends Model
 {
+    use SoftDeletes;
+
+    protected $table = 'posts';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +21,6 @@ class Blog extends Model
     ];
 
     public function comments() {
-        return $this->hasMany('App\Models\Comment','blog_id');
+        return $this->hasMany('App\Models\Post\PostsComments','post_id');
     }
 }

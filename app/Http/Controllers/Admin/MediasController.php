@@ -126,6 +126,35 @@ class MediasController extends Controller
         return redirect()->route('medias.index');
     }
 
+
+    /**
+     * 文件处理
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function files(Request $request)
+    {
+        $action =  $request->input('action','ReName');
+        $sfile =  $request->input('sfile','');
+        $dfile =  $request->input('dfile','');
+        // 取到磁盘实例
+        $disk = $this->disk;
+
+        //重命名 & 移动文件
+        if($action == 'ReName' || $action == 'MvFile'){
+            $disk->move($sfile, $dfile);
+            session()->flash('success','重命名成功');
+        }
+        //复制
+        if($action == 'CopyFile'){
+            $disk->copy($sfile, $dfile);
+            session()->flash('success','复制成功');
+        }
+
+
+        return redirect()->route('medias.index');
+    }
+
     /**
      * 返回目录下所有文件夹
      */

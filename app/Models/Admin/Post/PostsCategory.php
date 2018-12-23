@@ -1,78 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Post;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use Auth;
-
-class Menu extends Model
+class PostsCategory extends Model
 {
-    protected $table = 'menus';
+    protected $table='posts_category';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title','icon', 'parent_id', 'uri','order',
+        'parent_id','taxonomy', 'name', 'slug', 'seo_title', 'seo_keywords', 'seo_description', 'sort', 'status',
     ];
 
-    /**
-     * 获得此菜单下所有的角色。
-     */
-    public function roles(){
-        return $this->belongsToMany($this, 'role_has_menus', 'menus_id', 'role_id');
-
-    }
-
-
-    /*
-    * 获取菜单数据
-    */
-    public function getMenuList(){
-
-        $menus = $this->orderBy('order','asc')->get()->toArray();
-        $menuList = [];
-        if ($menus) {
-            $menuList = setChild($menus);
-            return $menuList;
-        }
-        return $menuList;
-    }
-
-
-    /*
-    * 获取左边菜单
-    */
-    public function sidebarMenu()
-    {
-
-        $menus = [];
-        $admin = Auth::guard('admin')->user();
-        if($admin->id == 1){
-            $menus = $this->orderBy('order','asc')->get()->toArray();
-        }else{
-
-            $hasRoles = Admin::hasRoles();
-            if(!empty($hasRoles->ids)){
-                $hasMenu = RoleHasMenus::getMenusByRoles($hasRoles->ids);
-                $menus = $this->whereIn('id',$hasMenu)->orderBy('order','asc')->get()->toArray();
-            }
-        }
-
-        if ($menus) {
-            $menuList = setChild($menus);
-            foreach ($menuList as $key => $value) {
-                if ($value['child']) {
-                    $sort = array_column($value['child'], 'order');
-                    array_multisort($sort,SORT_ASC,$value['child']);
-                }
-            }
-            return $menuList;
-        }
-        return [];
-    }
 
 
     //批量更新
@@ -114,7 +57,4 @@ class Menu extends Model
             return false;
         }
     }
-
-
-
 }

@@ -12,8 +12,8 @@ class MenuSeeder extends Seeder
      */
     public function run()
     {
-        Menu::create(['title' => '控制面板','uri' => '/admin/dashboard','parent_id'=>'0','order'=>'1','icon'=>'fa fa-bars']);
-        $mamage = Menu::create(['title' => '管理','uri' => '/admin/admins','parent_id'=>'0','order'=>'2','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '仪表盘','uri' => '/admin/dashboard','parent_id'=>'0','order'=>'1','icon'=>'fa fa-tachometer']);
+        $mamage = Menu::create(['title' => '管理','uri' => '/admin/admins','parent_id'=>'0','order'=>'2','icon'=>'fa fa-cog']);
 
         $parent_id = $mamage->id;
         Menu::create(['title' => '站点配置','uri' => '/admin/config','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
@@ -27,14 +27,17 @@ class MenuSeeder extends Seeder
         $parent_id = $medias->id;
         Menu::create(['title' => '文件列表','uri' => '/admin/medias','parent_id'=>$parent_id,'order'=>'6','icon'=>'fa fa-bars']);
 
-        $message = Menu::create(['title' => '消息通知','uri' => '/admin/message','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
+        $message = Menu::create(['title' => '站内信','uri' => '/admin/message','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
         $parent_id = $message->id;
         Menu::create(['title' => '通知列表','uri' => '/admin/message','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
 
-        $blog = Menu::create(['title' => '博文管理','uri' => '/admin/blogs','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
-        $parent_id = $blog->id;
-        Menu::create(['title' => '博文列表','uri' => '/admin/blogs','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
-        Menu::create(['title' => '评论列表','uri' => '/admin/comments','parent_id'=>$parent_id,'order'=>'2','icon'=>'fa fa-bars']);
+        $posts = Menu::create(['title' => '文章管理','uri' => '/admin/posts','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
+        $parent_id = $posts->id;
+        Menu::create(['title' => '模块设置','uri' => '/admin/posts/setting','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '文章分类','uri' => '/admin/posts/category','parent_id'=>$parent_id,'order'=>'2','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '文章列表','uri' => '/admin/posts','parent_id'=>$parent_id,'order'=>'3','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '回收站','uri' => '/admin/posts/trash','parent_id'=>$parent_id,'order'=>'4','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '评论列表','uri' => '/admin/posts/comments','parent_id'=>$parent_id,'order'=>'5','icon'=>'fa fa-bars']);
 
     }
 }

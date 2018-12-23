@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Settings;
+use App\Models\Admin\Post\PostsConfigs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SettingsController extends Controller
+class PostsSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $items = Settings::paginate(10);
-        return view('admin.settings.index', compact(['items']));
+        $configs = PostsConfigs::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.posts.setting.index',compact('configs'));
     }
 
     /**
@@ -26,7 +26,7 @@ class SettingsController extends Controller
      */
     public function create()
     {
-        return view('admin.settings.create');
+        return view('admin.posts.setting.create');
     }
 
     /**
@@ -38,15 +38,16 @@ class SettingsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request,[
-            'key'=>'required|unique:settings',
-            'value' => 'required',
-            'description' => 'required',
-            'status' => 'required',
+            'need_audit'=>'required',
+            'allow_comment' => 'required',
+            'post_type' => 'required',
+            'post_name' => 'required',
+            'sort' => 'required',
         ]);
-        Settings::create($data);
-        Setting::get($data['key'], $data['value']);
+
+        PostsConfigs::create($data);
         session()->flash('success','添加成功');
-        return redirect()->route('config.index');
+        return redirect()->route('setting.index');
     }
 
     /**
@@ -68,8 +69,8 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-        $setting = Settings::findOrFail($id);
-        return view('admin.settings.edit',compact(['setting']));
+        $config = PostsConfigs::find($id);
+        return view('admin.posts.setting.edit',compact(['config']));
     }
 
     /**
@@ -79,31 +80,30 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $input = $this->validate($request,[
-            'key'=>'required',
-            'value' => 'required',
-            'description' => 'required',
-            'status' => 'required',
+        $data = $this->validate($request,[
+            'need_audit'=>'required',
+            'allow_comment' => 'required',
+            'post_type' => 'required',
+            'post_name' => 'required',
+            'sort' => 'required',
         ]);
 
-        $data = Settings::findOrFail($id);
-        if($data->key != $input['key']){
-            Setting::forget($input['key']);
-        }
-        $data->key = $input['key'];
-        $data->value = $input['value'];
-        $data->description = $input['description'];
-        $data->status = $input['status'];
+        $config = PostsConfigs::find($id);
+        $config->need_audit = $request->need_audit;
+        $config->allow_comment = $request->allow_comment;
+        $config->post_type = $request->post_type;
+        $config->post_name = $request->post_name;
+        $config->sort = $request->sort;
 
-        if($data->save()){
+
+        if($config->save()){
             session()->flash('success','修改成功');
         }else{
             session()->flash('danger','修改失败');
-        } 
-
-        return redirect()->route('config.index');
+        }
+        return redirect()->route('setting.index');
     }
 
     /**
@@ -114,13 +114,12 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-        $setting = Settings::findOrFail($id);
-        setting()->forget($setting->key);
-        if($setting->delete()){
+        $config = PostsConfigs::findOrFail($id);
+        if($config->delete()){
             session()->flash('success','删除成功');
         }else{
             session()->flash('danger','删除失败');
         }
-        return redirect()->route('config.index');
+        return redirect()->route('setting.index');
     }
 }

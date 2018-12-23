@@ -14,6 +14,8 @@ class CreateSettingsTable extends Migration
         $this->table = config('setting.database.table');
         $this->key = config('setting.database.key');
         $this->value = config('setting.database.value');
+        $this->description = config('setting.database.description');
+        $this->status = config('setting.database.status');
 	}
 
 	/**
@@ -27,6 +29,9 @@ class CreateSettingsTable extends Migration
 			$table->increments('id');
 			$table->string($this->key)->index();
 			$table->text($this->value);
+			$table->text($this->description);
+			$table->tinyInteger($this->status)->default(false);
+            $table->timestamps();
 		});
 	}
 

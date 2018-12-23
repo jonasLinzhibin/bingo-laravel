@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
+use App\Models\Admin\Post\PostsComments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BlogsController extends Controller
+class PostsCommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,10 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.blogs.index',compact('blogs'));
+        $comments = PostsComments::with('post')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('admin.posts.comments.index',compact('comments'));
     }
 
     /**
