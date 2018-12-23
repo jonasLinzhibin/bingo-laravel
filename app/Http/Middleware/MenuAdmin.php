@@ -102,7 +102,9 @@ class MenuAdmin
                 if(!empty($item['child'])){
 
                     foreach ($item['child'] as $key => $sub){
-                        if(strstr(app('request')->url(),$sub['uri'])){
+
+                        $path = '/'.app('request')->path();
+                        if($path == $sub['uri']){
 
                             //添加页面标题
                             $pageTitle = '<h1>    '.$item['title'].'    <small></small>    </h1>';
