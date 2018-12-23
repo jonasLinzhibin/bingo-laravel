@@ -17,6 +17,6 @@ class PostsComments extends Model
     ];
 
     public function post() {
-        return $this->belongsTo('App\Models\Post\Posts');
+        return $this->belongsTo('App\Models\Admin\Post\Posts');
     }
 }
