@@ -32,17 +32,6 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::resource('medias','Admin\MediasController');
 
-        Route::post('posts/category/sort', 'Admin\PostsCategoryController@sort')->name('category.sort');
-        Route::post('posts/category/del/{id}', 'Admin\PostsCategoryController@del')->name('category.del');
-        Route::resource('posts/category','Admin\PostsCategoryController');
-
-        Route::resource('posts/setting','Admin\PostsSettingController');
-        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
-        Route::get('posts/trash', 'Admin\PostsController@trash')->name('posts.trash');
-        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
-        Route::resource('posts/comments','Admin\PostsCommentsController');
-        Route::resource('posts','Admin\PostsController');
-
         Route::get('menus', 'Admin\MenusController@index')->name('menus.index');
         Route::post('menus/store', 'Admin\MenusController@store')->name('menus.store');
         Route::post('menus/del/{id}', 'Admin\MenusController@del')->name('menus.del');
@@ -51,6 +40,21 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('menus/update/{id}', 'Admin\MenusController@update')->name('menus.update');
     });
 
+    Route::group(['as' => 'posts.','middleware' => ['auth.admin','auth.menu']], function () {
+
+        Route::post('posts/category/sort', 'Admin\PostsCategoryController@sort')->name('category.sort');
+        Route::post('posts/category/del/{id}', 'Admin\PostsCategoryController@del')->name('category.del');
+        Route::resource('posts/category','Admin\PostsCategoryController');
+
+        Route::resource('posts/setting','Admin\PostsSettingController');
+        Route::resource('posts/tags','Admin\PostsTagsController');
+        Route::resource('posts/comments','Admin\PostsCommentsController');
+        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
+        Route::get('posts/trash', 'Admin\PostsController@trash')->name('posts.trash');
+        Route::post('posts/restore/{id}', 'Admin\PostsController@restore')->name('posts.restore');
+        Route::resource('posts','Admin\PostsController');
+
+    });
     Route::group(['middleware' => 'guest.admin'], function () {
         Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
     });

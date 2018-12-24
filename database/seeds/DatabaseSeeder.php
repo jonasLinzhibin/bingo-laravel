@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(PostsConfigsSeeder::class);
+        $this->call(PostsCategorySeeder::class);
         $this->call(CommentSeeder::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin\Post;
+namespace App\Models\Post;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +17,6 @@ class PostsComments extends Model
     ];
 
     public function post() {
-        return $this->belongsTo('App\Models\Admin\Post\Posts');
+        return $this->belongsTo('App\Models\Post\Posts');
     }
 }

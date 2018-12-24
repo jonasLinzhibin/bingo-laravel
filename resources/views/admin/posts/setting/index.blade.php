@@ -9,7 +9,7 @@
 
                     <div class="box-tools ">
                         <div class="input-group input-group-lg" style="width: 150px;">
-                            <a href="{{ route('setting.create') }}" type="button" class="btn btn-block btn-info">添加类型</a>
+                            <a href="{{ route('posts.setting.create') }}" type="button" class="btn btn-block btn-info">添加类型</a>
 
                         </div>
                     </div>
@@ -45,9 +45,9 @@
                                 <td>{{$config->post_type}}</td>
                                 <td>{{$config->post_name}}</td>
                                 <td>
-                                    <a href="{{route('setting.edit',$config)}}" class="btn btn-info">修改</a>
+                                    <a href="{{route('posts.setting.edit',$config)}}" class="btn btn-info">修改</a>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <form action="{{route('setting.destroy',$config)}}" method="post">
+                                        <form action="{{route('posts.setting.destroy',$config)}}" method="post">
                                             {{csrf_field()}}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" class="btn btn-danger">删除</button>

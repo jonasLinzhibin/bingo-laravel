@@ -38,6 +38,7 @@ class MenuSeeder extends Seeder
         Menu::create(['title' => '文章列表','uri' => '/admin/posts','parent_id'=>$parent_id,'order'=>'3','icon'=>'fa fa-bars']);
         Menu::create(['title' => '回收站','uri' => '/admin/posts/trash','parent_id'=>$parent_id,'order'=>'4','icon'=>'fa fa-bars']);
         Menu::create(['title' => '评论列表','uri' => '/admin/posts/comments','parent_id'=>$parent_id,'order'=>'5','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '标签列表','uri' => '/admin/posts/tags','parent_id'=>$parent_id,'order'=>'6','icon'=>'fa fa-bars']);
 
     }
 }

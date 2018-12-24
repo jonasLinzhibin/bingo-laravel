@@ -59,7 +59,7 @@ class MenuAdmin
 
                         //添加选中项
                         $path = '/'.app('request')->path();
-                        if($path == $sub['uri']){
+                        if(strstr($path,$sub['uri'])){
                             $menu->setActiveClass('menu-open');
                             $menu->setActiveFromUrl($sub['uri']);
                             $menu->setExactActiveClass('active');

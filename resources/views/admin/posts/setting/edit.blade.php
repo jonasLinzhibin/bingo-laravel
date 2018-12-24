@@ -11,7 +11,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('setting.update',$config) }}" method="post" class="form-horizontal">
+                <form action="{{ route('posts.setting.update',$config) }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}

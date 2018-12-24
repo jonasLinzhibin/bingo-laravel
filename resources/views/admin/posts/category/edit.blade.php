@@ -14,7 +14,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{route('category.update',$category)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{{route('posts.category.update',$category)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}

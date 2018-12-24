@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Post\Posts;
+use App\Models\Post\PostsTags;
 use App\Models\Post\PostsCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PostsController extends Controller
+class PostsTagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +16,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::where('deleted_at','=',null)->orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.posts.post.index',compact('posts'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function trash()
-    {
-        $posts = Posts::onlyTrashed()->orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.posts.post.trash',compact('posts'));
+        $tags = PostsTags::orderBy('created_at', 'desc')->paginate(10);
+        $categorys = PostsCategory::getCategoryList();
+        return view('admin.posts.tags.index',compact(['tags','categorys']));
     }
 
     /**
@@ -38,7 +28,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.post.create');
+        $categorys = PostsCategory::getCategoryList();
+        return view('admin.posts.tags.create',compact(['categorys']));
     }
 
     /**
@@ -50,13 +41,14 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request,[
-            'title'=>'required',
-            'content' => 'required',
-            'audit' => 'required',
+            'name'=>'required',
+            'category_id'=>'required',
+            'sort' => 'required',
         ]);
-        Posts::create($data);
+
+        PostsTags::create($data);
         session()->flash('success','添加成功');
-        return redirect()->route('posts.posts.index');
+        return redirect()->route('posts.tags.index');
     }
 
     /**
@@ -78,9 +70,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Posts::findOrFail($id);
+        $tag = PostsTags::findOrFail($id);
         $categorys = PostsCategory::getCategoryList();
-        return view('admin.posts.post.edit',compact(['post','categorys']));
+        return view('admin.posts.tags.edit',compact(['tag','categorys']));
     }
 
     /**
@@ -93,22 +85,22 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request,[
-            'title'=>'required',
-            'content' => 'required',
-            'audit' => 'required',
+            'name'=>'required',
+            'category_id'=>'required',
+            'sort' => 'required',
         ]);
-        $post = Posts::findOrFail($id);
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->audit = $data['audit'];
 
-        if($post->save()){
+        $tag = PostsTags::find($id);
+        $tag->name = $request->name;
+        $tag->sort = $request->sort;
+
+
+        if($tag->save()){
             session()->flash('success','修改成功');
         }else{
             session()->flash('danger','修改失败');
         }
-
-        return redirect()->route('posts.posts.index');
+        return redirect()->route('posts.tags.index');
     }
 
     /**
@@ -119,29 +111,12 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Posts::findOrFail($id);
-        $post->delete();
-        if($post->trashed()){
+        $tag = PostsTags::findOrFail($id);
+        if($tag->delete()){
             session()->flash('success','删除成功');
         }else{
             session()->flash('danger','删除失败');
         }
-        return redirect()->route('posts.posts.index');
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        $post = Posts::where('id', $id)->restore();
-        if($post){
-            session()->flash('success','恢复成功');
-        }else{
-            session()->flash('danger','恢复失败');
-        }
-        return redirect()->route('posts.posts.index');
+        return redirect()->route('posts.tags.index');
     }
 }

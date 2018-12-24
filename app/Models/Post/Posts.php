@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin\Post;
+namespace App\Models\Post;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +17,7 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-        'title','content'
+        'category_id','author_id','title','content','thumb','tags','sort','audit','status','is_top','recommended','seo_title','seo_keywords','seo_description',
     ];
 
     public function comments() {

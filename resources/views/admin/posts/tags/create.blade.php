@@ -7,40 +7,39 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">配置</h3>
+                    <h3 class="box-title">添加标签</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('posts.setting.store') }}" method="post" class="form-horizontal">
+                <form action="{{ route('posts.tags.store') }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
                     <div class="box-body">
 
 
+
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">前台发布审核</label>
+                            <label class="control-label col-md-2" for="status">分类</label>
+                            <div class="col-md-8">
+                                <select name="category_id" class="form-control">
+                                    @foreach($categorys as $category)
+                                        <option value="{{$category['id']}}">{{$category['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">标签</label>
                             <div class="col-sm-10">
-                                <input type="radio" name="need_audit" value="0" checked>不需要
-                                <input type="radio" name="need_audit" value="1">需要
+                                <input type="text" class="form-control" name="name" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">是否允许评论</label>
+                            <label for="" class="col-sm-2 control-label">状态</label>
                             <div class="col-sm-10">
-                                <input type="radio" name="allow_comment" value="0" checked>不允许
-                                <input type="radio" name="allow_comment" value="1">允许
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">文章类型</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="post_type" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">类型名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="post_name" value="">
+                                <input type="radio" name="status" value="1" checked>正常
+                                <input type="radio" name="status" value="0" >禁用
                             </div>
                         </div>
                         <div class="form-group">

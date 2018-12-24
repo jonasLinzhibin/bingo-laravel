@@ -9,7 +9,7 @@
 
                     <div class="box-tools ">
                         <div class="input-group input-group-lg" style="width: 150px;">
-                            <a href="{{ route('posts.create') }}" type="button" class="btn btn-block btn-info">添加博文</a>
+                            <a href="{{ route('posts.posts.create') }}" type="button" class="btn btn-block btn-info">添加博文</a>
 
                         </div>
                     </div>
@@ -26,14 +26,16 @@
                         </tr>
                         @foreach($posts as $post)
                             <tr>
-                                <td>{{$post->id}}</td>
+                                <td>
+                                    <input type="checkbox" name="ids[]" value="{{$post->id}}">
+                                    {{$post->id}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>{{$post->created_at}}</td>
                                 <td>{{$post->updated_at}}</td>
                                 <td>
 
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <form action="{{route('posts.restore',$post)}}" method="post">
+                                        <form action="{{route('posts.posts.restore',$post)}}" method="post">
                                             {{csrf_field()}}
                                             {{ method_field('POST') }}
                                             <button type="submit" class="btn btn-danger">还原</button>

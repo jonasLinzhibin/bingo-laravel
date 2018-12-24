@@ -7,34 +7,38 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">添加文章</h3>
+                    <h3 class="box-title">修改</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('posts.posts.create') }}" method="post" class="form-horizontal">
+                <form action="{{ route('posts.tags.update',$tag) }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     <div class="box-body">
 
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="status">分类</label>
+                            <div class="col-md-8">
+                                <select name="category_id" class="form-control">
+                                    @foreach($categorys as $category)
+                                        <option value="{{$category['id']}}" @if($tag->id == $category->id) selected @endif >{{$category['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">标题</label>
+                            <label for="" class="col-sm-2 control-label">标签</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="title" value="{{ old('title') }}" >
+                                <input type="text" class="form-control" name="name" value="{{$tag->name}}">
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">内容</label>
+                            <label for="" class="col-sm-2 control-label">排序</label>
                             <div class="col-sm-10">
-                                <textarea name="content" class="form-control"  cols="30" rows="10">{{ old('content') }}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">状态</label>
-                            <div class="col-sm-10">
-                                <input type="radio" name="audit" value="0" checked>待审核
-                                <input type="radio" name="audit" value="1">已审核
-                                <input type="radio" name="audit" value="2">不通过
+                                <input type="text" class="form-control" name="sort" value="{{$tag->sort}}">
                             </div>
                         </div>
 
@@ -46,7 +50,7 @@
                     </div>
                     <!-- /.box-body -->
 
-                <!-- /.box-footer -->
+                    <!-- /.box-footer -->
                 </form>
             </div>
             <!-- /.box -->

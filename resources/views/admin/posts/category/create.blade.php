@@ -11,7 +11,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('setting.create') }}" method="post" class="form-horizontal">
+                <form action="{{ route('posts.setting.create') }}" method="post" class="form-horizontal">
 
                     {{ csrf_field() }}
                     <div class="box-body">

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Admin\Post\PostsConfigs;
+use App\Models\Post\PostsConfigs;
 
 class PostsConfigsSeeder extends Seeder
 {

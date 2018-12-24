@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="btn-group">
-                        <a class="btn btn-info btn-sm tree-nestable-save" title="Save" data-action="{{route('category.sort')}}" ><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;保存</span></a>
+                        <a class="btn btn-info btn-sm tree-nestable-save" title="Save" data-action="{{route('posts.category.sort')}}" ><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;保存</span></a>
                     </div>
 
                     <div class="btn-group">
@@ -55,8 +55,8 @@
                                         @endforeach
 
                                         <span class="pull-right dd-nodrag">
-                                        <a href="{{route('category.edit',['id'=>$item['id']])}}"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:void(0);" data-href="{{route('category.del',['id'=>$item['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
+                                        <a href="{{route('posts.category.edit',['id'=>$item['id']])}}"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:void(0);" data-href="{{route('posts.category.del',['id'=>$item['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
                                     </span>
                                     </div>
 
@@ -78,8 +78,8 @@
 
 
                                                         <span class="pull-right dd-nodrag">
-                                        <a href="{{route('category.edit',['id'=>$child['id']])}}"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:void(0);" data-href="{{route('category.del',['id'=>$child['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
+                                        <a href="{{route('posts.category.edit',['id'=>$child['id']])}}"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:void(0);" data-href="{{route('posts.category.del',['id'=>$child['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
                                     </span>
                                                     </div>
                                                 </li>
@@ -105,7 +105,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body" >
-                    <form method="POST" action="{{route('category.store')}}" class="form-horizontal" accept-charset="UTF-8">
+                    <form method="POST" action="{{route('posts.category.store')}}" class="form-horizontal" accept-charset="UTF-8">
 
                         {{ csrf_field() }}
                         <div class="box-body fields-group">

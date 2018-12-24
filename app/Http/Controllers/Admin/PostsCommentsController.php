@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Post\PostsComments;
+use App\Models\Post\PostsComments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -84,6 +84,12 @@ class PostsCommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = PostsComments::findOrFail($id);
+        if($comment->delete()){
+            session()->flash('success','删除成功');
+        }else{
+            session()->flash('danger','删除失败');
+        }
+        return redirect()->route('posts.comments.index');
     }
 }

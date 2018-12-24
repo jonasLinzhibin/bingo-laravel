@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Post\PostsConfigs;
+use App\Models\Post\PostsConfigs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -47,7 +47,7 @@ class PostsSettingController extends Controller
 
         PostsConfigs::create($data);
         session()->flash('success','添加成功');
-        return redirect()->route('setting.index');
+        return redirect()->route('posts.setting.index');
     }
 
     /**
@@ -103,7 +103,7 @@ class PostsSettingController extends Controller
         }else{
             session()->flash('danger','修改失败');
         }
-        return redirect()->route('setting.index');
+        return redirect()->route('posts.setting.index');
     }
 
     /**
@@ -120,6 +120,6 @@ class PostsSettingController extends Controller
         }else{
             session()->flash('danger','删除失败');
         }
-        return redirect()->route('setting.index');
+        return redirect()->route('posts.setting.index');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <form action="{{ route('posts.update',$post) }}" method="post" class="form-horizontal">
+        <form action="{{ route('posts.posts.update',$post) }}" method="post" class="form-horizontal">
         <div class="col-md-8">
             <!-- Horizontal Form -->
             <div class="box box-info">
@@ -53,37 +53,42 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3" style="padding:0;" for="date_d">发布时间:</label>
-                        <div class="col-md-8"> <input id="date_d" class="form-control form-datetime" type="text" value="2018-09-30 22:32:26" name="publish_time" readonly=""></div>
+                        <label class="control-label col-md-3" >发布时间:</label>
+                        <div class="col-md-8"> <input id="date_d" class="form-control form-datetime" type="text" value="{{$post->created_at }}" readonly=""></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3" for="status">审核状态:</label>
                         <div class="col-md-8">
-                            <select name="status" class="form-control">
-                                <option value="1" selected="">已发布</option>
-                                <option value="3">软删除</option>
-                                <option value="0">待审核</option>
+                            <select name="audit" class="form-control">
+
+                                <option value="1" @if($post->audit == 1) selected @endif>已发布</option>
+                                <option value="2" @if($post->audit == 2) selected @endif>不通过</option>
+                                <option value="0" @if($post->audit == 0) selected @endif>待审核</option>
+
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3" for="istop">置顶:</label>
+                        <label class="control-label col-md-3" >置顶:</label>
                         <div class="col-md-8">
-                            <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="" name="istop" id="istop" value="1" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div><span class="f12 pl-10 color-6">可在前台置顶显示</span>
+                            <input type="checkbox" name="is_top" id="is_top" value="1" >
+                            <label for="is_top">可在前台置顶显示</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3" for="recommended">推荐:</label>
                         <div class="col-md-8">
-                            <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="" name="recommended" id="recommended" value="1" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div><span class="f12 pl-10 color-6">作为站内推荐</span>
+                            <input type="checkbox" name="recommended" id="recommended" value="1" >
+                            <label for="recommended">作为站内推荐</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3" for="status">分类:</label>
                         <div class="col-md-8">
                             <select name="category_id" class="form-control">
-                                <option value="1">未分类</option>
-                                <option value="5">技术类</option>
+                                @foreach($categorys as $category)
+                                <option value="{{$category['id']}}">{{$category['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -100,7 +105,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" for="sort">排序:</label>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" name="sort" id="sort" value="99" placeholder="">
+                            <input type="number" class="form-control" name="sort" id="sort" value="{{$post->sort }}" placeholder="">
                         </div>
                     </div>
                 </div>

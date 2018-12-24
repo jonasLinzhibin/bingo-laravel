@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Post\PostsCategory;
-use App\Models\Admin\Post\PostsConfigs;
+use App\Models\Post\PostsCategory;
+use App\Models\Post\PostsConfigs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -55,7 +55,7 @@ class PostsCategoryController extends Controller
 
         PostsCategory::create($data);
         session()->flash('success','添加成功');
-        return redirect()->route('category.index');
+        return redirect()->route('posts.category.index');
     }
 
     /**
@@ -121,7 +121,7 @@ class PostsCategoryController extends Controller
         }else{
             session()->flash('danger','修改失败');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('posts.category.index');
     }
 
     /**
@@ -141,7 +141,7 @@ class PostsCategoryController extends Controller
     {
         $category = PostsCategory::findOrFail($id);
         if($category->delete()){
-            return ['status'=>'success','msg'=>'删除成功','uri'=>route('category.index')];
+            return ['status'=>'success','msg'=>'删除成功','uri'=>route('posts.category.index')];
         }else{
             return ['status'=>'danger','msg'=>'删除失败'];
         }
@@ -180,7 +180,7 @@ class PostsCategoryController extends Controller
         $res = $category->updateBatch($data);
 
         if($res !==false){
-            return ['status'=>'success','msg'=>'保存成功','uri'=>route('category.index')];
+            return ['status'=>'success','msg'=>'保存成功','uri'=>route('posts.category.index')];
         }else{
             return ['status'=>'danger','msg'=>'保存失败'];
         }

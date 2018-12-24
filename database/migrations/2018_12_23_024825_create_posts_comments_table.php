@@ -18,6 +18,7 @@ class CreatePostsCommentsTable extends Migration
             $table->string('content');
             $table->integer('post_id');
             $table->integer('user_id');
+            $table->integer('views')->default(0);
             $table->boolean('audit')->default(true)
                 ->comment('审核 0：待审 1：通过 2：不通过');
             $table->softDeletes();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin\Post;
+namespace App\Models\Post;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -15,6 +15,19 @@ class PostsCategory extends Model
     protected $fillable = [
         'parent_id','taxonomy', 'name', 'slug', 'seo_title', 'seo_keywords', 'seo_description', 'sort', 'status',
     ];
+
+
+    //获取分类
+    public static function getCategoryList(){
+
+        $list = self::all();
+        $dataList = [];
+        if ($list) {
+            $dataList = setChild($list);
+            return $dataList;
+        }
+        return $dataList;
+    }
 
 
 
