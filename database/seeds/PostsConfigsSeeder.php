@@ -22,5 +22,7 @@ class PostsConfigsSeeder extends Seeder
         ]);
         PostsConfigs::create(['need_audit' => 0, 'allow_comment' => 0, 'post_type' => 'product', 'post_name'=>'产品', 'sort'=>50,
         ]);
+        PostsConfigs::create(['need_audit' => 0, 'allow_comment' => 0, 'post_type' => 'helper', 'post_name'=>'帮助文档', 'sort'=>50,
+        ]);
     }
 }
