@@ -23,13 +23,11 @@ class MenuSeeder extends Seeder
         Menu::create(['title' => '角色列表','uri' => '/admin/roles','parent_id'=>$parent_id,'order'=>'5','icon'=>'fa fa-bars']);
         Menu::create(['title' => '会员列表','uri' => '/admin/users','parent_id'=>$parent_id,'order'=>'6','icon'=>'fa fa-bars']);
 
-        $medias = Menu::create(['title' => '文件管理','uri' => '/admin/medias','parent_id'=>'0','order'=>'3','icon'=>'fa fa-bars']);
-        $parent_id = $medias->id;
-        Menu::create(['title' => '文件列表','uri' => '/admin/medias','parent_id'=>$parent_id,'order'=>'6','icon'=>'fa fa-bars']);
+        $tools = Menu::create(['title' => '工具','uri' => '/admin/admins','parent_id'=>'0','order'=>'3','icon'=>'fa fa-cog']);
+        $parent_id = $tools->id;
 
-        $message = Menu::create(['title' => '站内信','uri' => '/admin/message','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
-        $parent_id = $message->id;
-        Menu::create(['title' => '通知列表','uri' => '/admin/message','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '文件管理','uri' => '/admin/medias','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '站内信','uri' => '/admin/message','parent_id'=>$parent_id,'order'=>'2','icon'=>'fa fa-bars']);
 
         $posts = Menu::create(['title' => '文章管理','uri' => '/admin/posts','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
         $parent_id = $posts->id;
