@@ -33,9 +33,9 @@ class MenuSeeder extends Seeder
 
         $posts = Menu::create(['title' => '文章管理','uri' => '/admin/posts','parent_id'=>'0','order'=>'5','icon'=>'fa fa-bars']);
         $parent_id = $posts->id;
-        Menu::create(['title' => '模块设置','uri' => '/admin/posts/setting','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
-        Menu::create(['title' => '文章分类','uri' => '/admin/posts/category','parent_id'=>$parent_id,'order'=>'2','icon'=>'fa fa-bars']);
-        Menu::create(['title' => '文章列表','uri' => '/admin/posts','parent_id'=>$parent_id,'order'=>'3','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '文章列表','uri' => '/admin/posts','parent_id'=>$parent_id,'order'=>'1','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '模块设置','uri' => '/admin/posts/setting','parent_id'=>$parent_id,'order'=>'2','icon'=>'fa fa-bars']);
+        Menu::create(['title' => '文章分类','uri' => '/admin/posts/category','parent_id'=>$parent_id,'order'=>'3','icon'=>'fa fa-bars']);
         Menu::create(['title' => '回收站','uri' => '/admin/posts/trash','parent_id'=>$parent_id,'order'=>'4','icon'=>'fa fa-bars']);
         Menu::create(['title' => '评论列表','uri' => '/admin/posts/comments','parent_id'=>$parent_id,'order'=>'5','icon'=>'fa fa-bars']);
         Menu::create(['title' => '标签列表','uri' => '/admin/posts/tags','parent_id'=>$parent_id,'order'=>'6','icon'=>'fa fa-bars']);
