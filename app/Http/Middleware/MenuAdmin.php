@@ -58,7 +58,8 @@ class MenuAdmin
                         $menu->addParentClass('treeview');
 
                         //添加选中项
-                        if(strstr(app('request')->url(),$sub['uri'])){
+                        $path = '/'.app('request')->path();
+                        if($path == $sub['uri']){
                             $menu->setActiveClass('menu-open');
                             $menu->setActiveFromUrl($sub['uri']);
                             $menu->setExactActiveClass('active');
@@ -75,7 +76,8 @@ class MenuAdmin
                     <span>'.$item['title'].'</span>';
                 $menu->link($item['uri'],$header);
 
-                if(strstr(app('request')->url(),$item['uri'])){
+                $path = '/'.app('request')->path();
+                if($path == $item['uri']){
                     $menu->setActiveClass('active');
                     $menu->setActiveFromUrl($item['uri']);
                 }
