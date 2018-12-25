@@ -91,11 +91,7 @@ class PostsTagsController extends Controller
         ]);
 
         $tag = PostsTags::find($id);
-        $tag->name = $request->name;
-        $tag->sort = $request->sort;
-
-
-        if($tag->save()){
+        if($tag->fill($data)->save()){
             session()->flash('success','修改成功');
         }else{
             session()->flash('danger','修改失败');
@@ -112,6 +108,7 @@ class PostsTagsController extends Controller
     public function destroy($id)
     {
         $tag = PostsTags::findOrFail($id);
+        $tag->posts()->detach();
         if($tag->delete()){
             session()->flash('success','删除成功');
         }else{

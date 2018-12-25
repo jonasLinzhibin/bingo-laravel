@@ -4,7 +4,6 @@ namespace App\Models\Post;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 class Posts extends Model
 {
     use SoftDeletes;
@@ -21,6 +20,15 @@ class Posts extends Model
     ];
 
     public function comments() {
-        return $this->hasMany('App\Models\Admin\Post\PostsComments','post_id');
+        return $this->hasMany('App\Models\Post\PostsComments','post_id');
     }
+
+    /**
+     * 获得此文章下所有的标签。
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Post\PostsTags', 'posts_has_tags', 'post_id', 'tag_id');
+    }
+
 }

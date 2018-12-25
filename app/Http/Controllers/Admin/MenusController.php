@@ -88,10 +88,10 @@ class MenusController extends Controller
         $menu->uri = $request->uri;
         $menu->icon = $request->icon;
 
-        $roles = $request['roles'];
 
         if($menu->save()){
 
+            $roles = $request['roles'];
             if (isset($roles)) {
                 $menu->roles()->sync($roles);  // 如果有角色选中与菜单关联则更新菜单角色
             } else {
@@ -111,6 +111,7 @@ class MenusController extends Controller
     public function del($id)
     {
         $menu = Menus::findOrFail($id);
+        $menu->roles()->detach();
         if($menu->delete()){
             return ['status'=>'success','msg'=>'删除成功','uri'=>route('menus.index')];
         }else{

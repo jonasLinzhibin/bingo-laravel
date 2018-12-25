@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <form action="{{ route('posts.posts.update',$post) }}" method="post" class="form-horizontal">
+        <form action="{{ route('posts.posts.update',$post['id']) }}" method="post" class="form-horizontal">
         <div class="col-md-8">
             <!-- Horizontal Form -->
             <div class="box box-info">
@@ -21,21 +21,13 @@
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">标题</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="title" value="{{$post->title}}" >
+                                <input type="text" class="form-control" name="title" value="{{$post['title']}}" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
-                                <textarea name="content" class="form-control"  cols="30" rows="10">{{$post->content }}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">状态</label>
-                            <div class="col-sm-10">
-                                <input type="radio" name="audit" value="0" @if($post->audit == 0) checked @endif>待审核
-                                <input type="radio" name="audit" value="1" @if($post->audit == 1) checked @endif>已审核
-                                <input type="radio" name="audit" value="2" @if($post->audit == 2) checked @endif>不通过
+                                <textarea name="content" class="form-control"  cols="30" rows="10">{{$post['content'] }}</textarea>
                             </div>
                         </div>
 
@@ -54,16 +46,16 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label class="control-label col-md-3" >发布时间:</label>
-                        <div class="col-md-8"> <input id="date_d" class="form-control form-datetime" type="text" value="{{$post->created_at }}" readonly=""></div>
+                        <div class="col-md-8"> <input id="date_d" class="form-control form-datetime" type="text" value="{{$post['created_at'] }}" readonly=""></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3" for="status">审核状态:</label>
                         <div class="col-md-8">
                             <select name="audit" class="form-control">
 
-                                <option value="1" @if($post->audit == 1) selected @endif>已发布</option>
-                                <option value="2" @if($post->audit == 2) selected @endif>不通过</option>
-                                <option value="0" @if($post->audit == 0) selected @endif>待审核</option>
+                                <option value="0" @if($post['audit'] == 0) selected @endif>待审核</option>
+                                <option value="1" @if($post['audit'] == 1) selected @endif>已审核</option>
+                                <option value="2" @if($post['audit'] == 2) selected @endif>不通过</option>
 
                             </select>
                         </div>
@@ -71,14 +63,14 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" >置顶:</label>
                         <div class="col-md-8">
-                            <input type="checkbox" name="is_top" id="is_top" value="1" >
+                            <input type="checkbox" name="is_top" id="is_top" value="1" @if($post['is_top']) checked @endif >
                             <label for="is_top">可在前台置顶显示</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3" for="recommended">推荐:</label>
                         <div class="col-md-8">
-                            <input type="checkbox" name="recommended" id="recommended" value="1" >
+                            <input type="checkbox" name="recommended" id="recommended" value="1"  @if($post['recommended']) checked @endif >
                             <label for="recommended">作为站内推荐</label>
                         </div>
                     </div>
@@ -87,7 +79,7 @@
                         <div class="col-md-8">
                             <select name="category_id" class="form-control">
                                 @foreach($categorys as $category)
-                                <option value="{{$category['id']}}">{{$category['name']}}</option>
+                                <option value="{{$category['id']}}" @if($post['category_id'] == $category->id) selected @endif>{{$category['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -96,8 +88,9 @@
                         <label class="control-label col-md-3" for="status">标签:</label>
                         <div class="col-md-8">
                             <select multiple="" name="tag_ids" class="form-control">
-                                <option value="4">大数据</option>
-                                <option value="7">运营</option>
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}" @if(in_array($tag->id,$post['tag_ids'])) selected @endif>{{$tag['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -105,7 +98,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3" for="sort">排序:</label>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" name="sort" id="sort" value="{{$post->sort }}" placeholder="">
+                            <input type="number" class="form-control" name="sort" id="sort" value="{{$post['sort'] }}" placeholder="">
                         </div>
                     </div>
                 </div>

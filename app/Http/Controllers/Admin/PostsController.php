@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post\Posts;
 use App\Models\Post\PostsCategory;
+use App\Models\Post\PostsTags;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::where('deleted_at','=',null)->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Posts::where('deleted_at','=',null)->orderBy('created_at', 'desc')->with('tags')->paginate(10);
+
         return view('admin.posts.post.index',compact('posts'));
     }
 
@@ -38,7 +40,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.post.create');
+        $categorys = PostsCategory::getCategoryList();
+        $tags = PostsTags::where('category_id',1)->get();
+        return view('admin.posts.post.create',compact(['categorys','tags']));
     }
 
     /**
@@ -49,12 +53,29 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request,[
+        $this->validate($request,[
             'title'=>'required',
             'content' => 'required',
             'audit' => 'required',
         ]);
-        Posts::create($data);
+        $data = $request->all();
+        $post = Posts::create($data);
+
+        if($post){
+
+            $tags = $request['tag_ids']; // 获取输入的标签
+
+            if (isset($tags)) {
+                $post->tags()->sync($tags);  // 如果有标签选中与文章关联则更新文章标签
+            } else {
+                $post->tags()->detach(); // 如果没有选择任何与文章关联的标签则将之前关联标签解除
+            }
+
+            session()->flash('success','保存成功');
+        }else{
+            session()->flash('danger','保存失败');
+        }
+
         session()->flash('success','添加成功');
         return redirect()->route('posts.posts.index');
     }
@@ -78,9 +99,18 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Posts::findOrFail($id);
+
+        $post = Posts::with('tags')->find($id)->toArray();
+        $post['tag_ids'] = [];
+        foreach ($post['tags'] as $tag){
+            $post['tag_ids'][] = $tag['id'];
+        }
+
+
         $categorys = PostsCategory::getCategoryList();
-        return view('admin.posts.post.edit',compact(['post','categorys']));
+        $tags = PostsTags::where('category_id',$post['category_id'])->get();
+
+        return view('admin.posts.post.edit',compact(['post','categorys','tags']));
     }
 
     /**
@@ -92,17 +122,26 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->validate($request,[
+        $this->validate($request,[
             'title'=>'required',
             'content' => 'required',
             'audit' => 'required',
         ]);
+        $input = $request->all();
         $post = Posts::findOrFail($id);
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->audit = $data['audit'];
+        unset($input['tag_ids']);
 
-        if($post->save()){
+        if($post->fill($input)->save()){
+
+
+            $tags = $request['tag_ids']; // 获取输入的标签
+
+            if (isset($tags)) {
+                $post->tags()->sync($tags);  // 如果有标签选中与文章关联则更新文章标签
+            } else {
+                $post->tags()->detach(); // 如果没有选择任何与文章关联的标签则将之前关联标签解除
+            }
+
             session()->flash('success','修改成功');
         }else{
             session()->flash('danger','修改失败');
