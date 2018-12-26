@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">内容</label>
                             <div class="col-sm-10">
-                                <textarea name="content" class="form-control"  cols="30" rows="10">{{$post['content'] }}</textarea>
+                                <textarea id="content" name="content" rows="10" cols="80">{{$post['content'] }}</textarea>
                             </div>
                         </div>
 
@@ -121,4 +121,15 @@
 
         </form>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(function () {
+
+            CKEDITOR.replace( 'content', {
+            });
+
+        });
+    </script>
 @endsection

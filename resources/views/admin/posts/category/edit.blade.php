@@ -1,8 +1,5 @@
 @extends('admin.layouts.default')
 
-@section('style')
-    <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.css') }}">
-@endsection
 @section('content')
 
     <div class="row">
@@ -112,16 +109,4 @@
             <!-- /.box -->
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="{{asset('bower_components/select2/dist/js/select2.js')}}"></script>
-    <script>
-        $(function () {
-
-
-        });
-
-    </script>
-
 @endsection

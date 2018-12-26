@@ -30,6 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/toastr/build/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/dist/sweetalert2.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css') }}">
@@ -118,7 +119,11 @@ desired effect
 <script src="{{asset('plugins/toastr/build/toastr.min.js')}}"></script>
 <script src="{{asset('plugins/sweetalert2/dist/sweetalert2.min.js')}}"></script>
 <script src="{{asset('plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js')}}"></script>
+<script src="{{asset('bower_components/select2/dist/js/select2.js')}}"></script>
 
+<!-- CK Editor -->
+<script src="{{asset('bower_components/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('bower_components/ckeditor/config.js')}}"></script>
 
 @section('script')
 @show

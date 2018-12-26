@@ -65,6 +65,7 @@ return [
         'web' => [
             'driver' => 'local',
             'root' => public_path('/'),
+            'url' => env('APP_URL').'/',
             'visibility' => 'public',
         ],
         'media' => [

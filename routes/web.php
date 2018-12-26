@@ -55,6 +55,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('posts','Admin\PostsController');
 
     });
+
+
+    Route::group(['as' => 'uploader.','middleware' => ['auth.admin']], function () {
+        Route::post('uploader/editor/image', 'Admin\UploadEditorController@image')->name('editor.image');
+    });
+
     Route::group(['middleware' => 'guest.admin'], function () {
         Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
     });
