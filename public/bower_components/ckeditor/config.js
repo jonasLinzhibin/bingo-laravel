@@ -44,7 +44,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.image_previewText = ' ';
     config.filebrowserUploadMethod = 'form';
     // 开启工具栏“图像”中文件上传功能，后面的url为图片上传要指向的的action或servlet
-    config.filebrowserImageUploadUrl= "/admin/uploader/editor/image" + "?_token=" + csrf_token;
+    config.filebrowserImageUploadUrl= "/admin/uploader/ckeditor" + "?_token=" + csrf_token;
 
 
 };

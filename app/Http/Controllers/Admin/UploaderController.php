@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class UploadEditorController extends Controller
+class UploaderController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function image(Request $request){
+    public function ckEditor(Request $request){
 
         $ck = $request->get('CKEditorFuncNum','1');
         $file = $request->file('upload');
