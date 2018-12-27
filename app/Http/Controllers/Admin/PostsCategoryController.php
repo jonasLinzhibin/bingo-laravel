@@ -18,12 +18,9 @@ class PostsCategoryController extends Controller
     {
 
         $post_configs = PostsConfigs::getConfigs();
-        $list = PostsCategory::orderBy('sort','asc')->get()->toArray();
+        $categorys = PostsCategory::getCategoryList();
 
-        $categorys = [];
-        if ($list) {
-            $categorys = setChild($list);
-        }
+
         return view('admin.posts.category.index',compact(['categorys','post_configs']));
     }
 

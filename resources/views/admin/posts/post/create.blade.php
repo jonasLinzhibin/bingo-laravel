@@ -74,8 +74,8 @@
                             <label class="control-label col-md-3" for="status">分类:</label>
                             <div class="col-md-8">
                                 <select name="category_id" class="form-control">
-                                    @foreach($categorys as $category)
-                                        <option value="{{$category['id']}}" >{{$category['name']}}</option>
+                                    @foreach($categorys as $item)
+                                        <option value="{{$item['id']}}" >{{$item['html']}}{{$item['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>

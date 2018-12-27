@@ -35,13 +35,14 @@
     "autoload": {
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "app/Helpers/Util"
         ],
         "psr-4": {
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/functions.php"
+            "app/Helpers/Function/functions.php"
         ]
 
     },

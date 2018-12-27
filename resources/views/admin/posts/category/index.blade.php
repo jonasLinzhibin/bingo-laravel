@@ -116,12 +116,7 @@
                                     <select class="form-control js-select2" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                         <option value="0">顶级</option>
                                         @foreach($categorys as $item)
-                                            <option value="{{$item['id']}}">{{$item['name']}}</option>
-                                            @if(!empty($item['child']))
-                                                @foreach($item['child'] as $child)
-                                                    <option value="{{$child['id']}}">一一{{$child['name']}}</option>
-                                                @endforeach
-                                            @endif
+                                            <option value="{{$item['id']}}">{{$item['html']}}{{$item['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>

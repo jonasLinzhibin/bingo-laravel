@@ -30,7 +30,7 @@
                                 <td>
 
                                     @foreach($categorys as $category)
-                                       @if($tag->category_id == $category->id) {{$category['name']}} @endif
+                                       @if($tag->category_id == $category['id']) {{$category['name']}} @endif
                                     @endforeach
                                 </td>
                                 <td>{{$tag->name}}</td>
