@@ -2,8 +2,6 @@
  * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
  */
-var csrf_token = $('meta[name="csrf-token"]').attr('content');
-var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
@@ -44,7 +42,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.image_previewText = ' ';
     config.filebrowserUploadMethod = 'form';
     // 开启工具栏“图像”中文件上传功能，后面的url为图片上传要指向的的action或servlet
-    config.filebrowserImageUploadUrl= "/admin/uploader/ckeditor" + "?_token=" + csrf_token;
+    config.filebrowserImageUploadUrl= CKEDITOR_UPLOADER_URL;
 
 
 };

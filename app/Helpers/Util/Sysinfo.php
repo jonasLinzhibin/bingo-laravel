@@ -101,7 +101,7 @@ class Sysinfo
     {
         return extension_loaded('curl')?"是":"否";
     }
-    //是否支持魔术方法
+    //是否支持魔术函数
     public function magic_quotes_gpc()
     {
         return get_magic_quotes_gpc()?"是":"否";

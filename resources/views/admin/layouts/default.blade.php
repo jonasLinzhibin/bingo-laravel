@@ -35,29 +35,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/dist/sweetalert2.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('plugins/webuploader/css/webuploader.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/webuploader/css/upload.css') }}">
   @section('style')
   @show
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-iboxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -114,6 +96,7 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      admins experience. -->
+<script src="{{asset('admin/js/config.js')}}"></script>
 <script src="{{asset('bower_components/layer/dist/layer.js')}}"></script>
 <script src="{{asset('admin/js/clipboard.min.js')}}"></script>
 <script src="{{asset('plugins/toastr/build/toastr.min.js')}}"></script>
@@ -124,6 +107,10 @@ desired effect
 <!-- CK Editor -->
 <script src="{{asset('bower_components/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('bower_components/ckeditor/config.js')}}"></script>
+
+<script src="{{asset('plugins/webuploader/js/webuploader.min.js')}}"></script>
+<script src="{{asset('plugins/webuploader/js/webuploader.html5only.min.js')}}"></script>
+<script src="{{asset('plugins/webuploader/js/upload.js')}}"></script>
 
 @section('script')
 @show

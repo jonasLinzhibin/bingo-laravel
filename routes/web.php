@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['as' => 'uploader.','middleware' => ['auth.admin']], function () {
         Route::post('uploader/ckeditor', 'Admin\UploaderController@ckEditor')->name('upload.ckeditor');
+        Route::post('uploader/webuploader', 'Admin\UploaderController@webUploader')->name('upload.webuploader');
     });
 
     Route::group(['middleware' => 'guest.admin'], function () {

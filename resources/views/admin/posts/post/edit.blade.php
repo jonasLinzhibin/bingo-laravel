@@ -101,6 +101,20 @@
                             <input type="number" class="form-control" name="sort" id="sort" value="{{$post['sort'] }}" placeholder="">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >封面图:</label>
+                        <div class="col-md-8">
+                            <input type="hidden" class="img-id" name="thumb" value=" ">
+                            <div class="upload-container">
+                                <div class="upload-picker">
+                                    <i class="upload-btn fa fa-plus"></i>
+                                    <div class="picker1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div><!--box-->
         </div>
@@ -124,11 +138,14 @@
 @endsection
 
 @section('script')
+
     <script>
         $(function () {
 
-            CKEDITOR.replace( 'content', {
-            });
+            CKEDITOR.replace( 'content');
+
+            initWebUploader('.picker1', true, WEBUPLOADER_UPLOADER_URL, '');
+
 
         });
     </script>
