@@ -31,4 +31,8 @@ class Posts extends Model
         return $this->belongsToMany('App\Models\Post\PostsTags', 'posts_has_tags', 'post_id', 'tag_id');
     }
 
+    public function counts(){
+        return $this->where('status',1)->count();
+    }
+
 }

@@ -56,4 +56,8 @@ class Admin extends Authenticatable implements HasMedia
 
     }
 
+    public function counts(){
+        return $this->where('status',1)->count();
+    }
+
 }

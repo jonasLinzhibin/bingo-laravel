@@ -25,4 +25,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function counts(){
+        return $this->where('status',1)->count();
+    }
 }
