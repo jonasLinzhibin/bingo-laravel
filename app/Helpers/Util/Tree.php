@@ -120,7 +120,7 @@ class Tree
 				$spacer = $adds ? $adds . $j : '';
 				@extract ( $a );
 
-				$a [$this->html] = $spacer . ' ' . $a [$this->level];
+				$a [$this->html] = $spacer . ' ' . $a [$this->html];
 				$this->ret [$a [$this->id]] = $a;
 
                 if(isset($this->ret [$a [$this->fid]])){
