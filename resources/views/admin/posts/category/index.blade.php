@@ -39,7 +39,7 @@
                     <div class="dd" id="tree-nestable">
                         <ol class="dd-list">
 
-                            @foreach($categorys as $item)
+                            @foreach($categorys_list as $item)
                                 <li class="dd-item" data-id="{{$item['id']}}">
 
                                     <div class="dd-handle">
@@ -82,6 +82,39 @@
                                         <a href="javascript:void(0);" data-href="{{route('posts.category.del',['id'=>$child['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
                                     </span>
                                                     </div>
+
+
+
+                                                    @if(!empty($child['child']))
+                                                        <ol class="dd-list">
+                                                            @foreach($child['child'] as $child2)
+                                                                <li class="dd-item" data-id="{{$child2['id']}}">
+                                                                    <div class="dd-handle">
+
+                                                                        <i class="fa fa-bars"></i>&nbsp;
+                                                                        <strong>{{$child2['name']}} ( ID:{{$child2['id']}} )</strong>&nbsp;&nbsp;&nbsp;
+                                                                        {{--<a href="javascript:void(0)" class="dd-nodrag">{{$child['slug']}}</a>--}}
+
+                                                                        @foreach($post_configs['data'] as $config)
+                                                                            @if($config['id'] == $child2['taxonomy'])
+                                                                                <span class="label label-default">{{$config['post_type']}}</span>
+                                                                            @endif
+                                                                        @endforeach
+
+
+                                                                        <span class="pull-right dd-nodrag">
+                                        <a href="{{route('posts.category.edit',['id'=>$child2['id']])}}"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:void(0);" data-href="{{route('posts.category.del',['id'=>$child2['id']])}}" class="ajax-confirm"><i class="fa fa-trash"></i></a>
+                                    </span>
+                                                                    </div>
+                                                                </li>
+                                                            @endforeach
+                                                        </ol>
+                                                    @endif
+
+
+
+
                                                 </li>
                                             @endforeach
                                         </ol>
@@ -116,7 +149,7 @@
                                     <select class="form-control js-select2" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                         <option value="0">顶级</option>
                                         @foreach($categorys as $item)
-                                            <option value="{{$item['id']}}">{{$item['html']}}{{$item['name']}}</option>
+                                            <option value="{{$item['id']}}">{{$item['tree_html']}}{{$item['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -139,7 +172,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2  control-label">分类类型</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control js-select2" name="taxonomy" data-value="" tabindex="-1" aria-hidden="true"> 
+                                    <select class="form-control js-select2" name="taxonomy" data-value="" tabindex="-1" aria-hidden="true">
                                         @foreach($post_configs['data'] as $config)
                                             <option value="{{$config['id']}}">{{$config['post_type']}}</option>
                                         @endforeach

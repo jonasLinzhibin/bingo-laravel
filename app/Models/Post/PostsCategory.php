@@ -20,7 +20,8 @@ class PostsCategory extends Model
     //获取分类
     public static function getCategoryList(){
         $all = self::orderBy('sort','asc')->get()->toArray();
-        return $all ? getTree($all,'id','parent_id','html') : [];
+
+        return $all ? getTree($all) : [];
     }
 
 

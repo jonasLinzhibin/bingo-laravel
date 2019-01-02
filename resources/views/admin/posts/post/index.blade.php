@@ -31,7 +31,7 @@
                                 <td>{{$post->created_at}}</td>
                                 <td>{{$post->updated_at}}</td>
                                 <td>
-                                    <a href="{{route('posts.posts.show',$post)}}"     class="btn btn-info">查看</a>
+                                    {{--<a href="{{route('posts.posts.show',$post)}}"     class="btn btn-info">查看</a>--}}
                                     <a href="{{route('posts.posts.edit',$post)}}" class="btn btn-info">修改</a>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <form action="{{route('posts.posts.destroy',$post)}}" method="post">

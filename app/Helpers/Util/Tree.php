@@ -23,17 +23,27 @@ class Tree
     var $fid;
     var $html;
     var $level;
+    var $child;
+    var $child_num;
+    var $sort;
+    var $sort_column;
 
     /**
      * 构造函数，初始化类
      */
-    public function __construct($arr = array(),$id = 'id',$fid = 'parent_id',$html = 'html',$level = 'level') {
+    public function __construct($arr = array(),$config = []) {
         $this->arr = $arr;
         $this->ret = '';
-        $this->id = $id;
-        $this->fid = $fid;
-        $this->html = $html;
-        $this->level = $level;
+
+        $this->id = isset($config['id']) ? $config['id'] : 'id';;
+        $this->fid = isset($config['parent_id']) ? $config['parent_id'] : 'parent_id';
+        $this->child = isset($config['tree_child']) ? $config['tree_child'] : 'tree_child';
+        $this->child_num = isset($config['tree_child_num']) ? $config['tree_child_num'] : 'tree_child_num';
+        $this->level = isset($config['tree_level']) ? $config['tree_level'] : 'tree_level';
+        $this->html = isset($config['tree_html']) ? $config['tree_html'] : 'tree_html';
+        $this->sort = isset($config['sort']) ? $config['sort'] : 'SORT_ASC';
+        $this->sort_column = isset($config['sort_column']) ? $config['sort_column'] : '';
+
         return is_array ( $arr );
     }
 	
@@ -54,8 +64,8 @@ class Tree
                         $a [$this->level] = $level;
                     }
 
-                    if(!isset($a['child_num'])){
-                        $a ['child_num'] = 0;
+                    if(!isset($a[$this->child_num])){
+                        $a [$this->child_num] = 0;
                     }
 
                     $newarr [$id] = $a;
@@ -92,7 +102,7 @@ class Tree
         return $a;
     }
 
-/**
+    /**
 	 * +------------------------------------------------
 	 * 格式化数组
 	 * +------------------------------------------------
@@ -125,7 +135,7 @@ class Tree
 
                 if(isset($this->ret [$a [$this->fid]])){
                     $temp = $this->ret [$a [$this->fid]];
-                    $temp['child_num'] = $total;
+                    $temp[$this->child_num] = $total;
                     $this->ret [$a [$this->fid]] = $temp;
                 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Posts;
 
 use App\Models\Post\PostsCategory;
 use App\Models\Post\PostsConfigs;
@@ -19,9 +19,10 @@ class PostsCategoryController extends Controller
 
         $post_configs = PostsConfigs::getConfigs();
         $categorys = PostsCategory::getCategoryList();
+        $categorys_list = setChild($categorys);
 
 
-        return view('admin.posts.category.index',compact(['categorys','post_configs']));
+        return view('admin.posts.category.index',compact(['categorys_list','categorys','post_configs']));
     }
 
     /**
@@ -76,12 +77,7 @@ class PostsCategoryController extends Controller
     {
 
         $configs = PostsConfigs::orderBy('sort','asc')->get()->toArray();
-        $list = PostsCategory::orderBy('sort','asc')->get()->toArray();
-
-        $categorys = [];
-        if ($list) {
-            $categorys = setChild($list);
-        }
+        $categorys = PostsCategory::getCategoryList();
         $category = PostsCategory::findOrFail($id);
         return view('admin.posts.category.edit',compact(['category','categorys','configs']));
     }

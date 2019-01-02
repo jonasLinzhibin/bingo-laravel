@@ -98,13 +98,8 @@
                                     <input type="hidden" name="parent_id">
                                     <select class="form-control js-select2" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                         <option value="0">顶级菜单</option>
-                                        @foreach($menus as $item)
-                                        <option value="{{$item['id']}}">{{$item['title']}}</option>
-                                            @if(!empty($item['child']))
-                                                @foreach($item['child'] as $child)
-                                                    <option value="{{$child['id']}}">一一{{$child['title']}}</option>
-                                                @endforeach
-                                            @endif
+                                        @foreach($menus_list as $item)
+                                        <option value="{{$item['id']}}">{{$item['tree_html']}}{{$item['title']}}</option>
                                         @endforeach
                                     </select>
                                   </div>

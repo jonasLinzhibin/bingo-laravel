@@ -66,10 +66,22 @@ if (! function_exists('setChild'))
 */
 if (! function_exists('getTree'))
 {
-    function getTree($data,$id = 'id',$fid = 'parent_id',$html = 'html')
+    function getTree($data,$config = [])
     {
-        $tree = new Tree($data,$id, $fid, $html);
+        $tree = new Tree($data,$config);
         return $tree->getArray();
+    }
+}
+
+/*
+* 设置子分类树形分类
+*/
+if (! function_exists('getTreeChild'))
+{
+    function getTreeChild($data,$config = [])
+    {
+        $tree = new Tree($data,$config);
+        return $tree->getChildArray();
     }
 }
 

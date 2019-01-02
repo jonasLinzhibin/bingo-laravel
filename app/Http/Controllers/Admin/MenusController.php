@@ -16,7 +16,9 @@ class MenusController extends Controller
         $roles = Role::all();
         $menu = new Menus();
         $menus = $menu->getMenuList();
-        return view('admin.menus.index',compact(['menus','roles']));
+        $menus_list = getTree($menus);
+        $menus = setChild($menus);
+        return view('admin.menus.index',compact(['menus_list','menus','roles']));
     }
 
     /**
@@ -61,6 +63,7 @@ class MenusController extends Controller
         $roles = Role::all();
         $menu = new Menus();
         $menus = $menu->getMenuList();
+        $menus = getTree($menus);
 
         $hasRoles = Admin::hasRoles();
         $menu = Menus::findOrFail($id);

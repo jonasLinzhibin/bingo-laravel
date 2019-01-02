@@ -31,14 +31,7 @@ class Menu extends Model
     * 获取菜单数据
     */
     public function getMenuList(){
-
-        $menus = $this->orderBy('order','asc')->get()->toArray();
-        $menuList = [];
-        if ($menus) {
-            $menuList = setChild($menus);
-            return $menuList;
-        }
-        return $menuList;
+        return $this->orderBy('order','asc')->get()->toArray();
     }
 
 

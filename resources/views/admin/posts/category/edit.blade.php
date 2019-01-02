@@ -32,12 +32,7 @@
                                 <select class="form-control js-select2" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                     <option value="0">顶级</option>
                                     @foreach($categorys as $item)
-                                        <option value="{{$item['id']}}" @if($item['id'] == $category->parent_id) selected @endif >{{$item['name']}}</option>
-                                        @if(!empty($item['child']))
-                                            @foreach($item['child'] as $child)
-                                                <option value="{{$child['id']}}" @if($child['id'] == $category->parent_id) selected @endif >一一{{$child['name']}}</option>
-                                            @endforeach
-                                        @endif
+                                        <option value="{{$item['id']}}" @if($item['id'] == $category->parent_id) selected @endif >{{$item['tree_html']}}{{$item['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>

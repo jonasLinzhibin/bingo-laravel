@@ -75,7 +75,7 @@
                             <div class="col-md-8">
                                 <select name="category_id" class="form-control">
                                     @foreach($categorys as $item)
-                                        <option value="{{$item['id']}}" >{{$item['html']}}{{$item['name']}}</option>
+                                        <option value="{{$item['id']}}" >{{$item['tree_html']}}{{$item['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>

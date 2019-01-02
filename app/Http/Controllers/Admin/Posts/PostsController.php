@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Posts;
 
 use App\Models\Post\Posts;
 use App\Models\Post\PostsCategory;
