@@ -18,6 +18,7 @@ class Admin extends Authenticatable implements HasMedia
     use HasRoles;
     use HasMediaTrait;
 
+    protected $table = 'admins';
     /**
      * The attributes that are mass assignable.
      *

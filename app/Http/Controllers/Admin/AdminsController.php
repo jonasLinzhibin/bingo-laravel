@@ -88,7 +88,6 @@ class AdminsController extends Controller
      */
     public function edit(Admin $admin)
     {
-//        $this->authorize('update',$admin);
         $roles = Role::all();
         //$admin->getFirstMediaUrl('avatar');
 
@@ -105,12 +104,14 @@ class AdminsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $admin = Admin::findOrFail($id);
+        $user = auth()->guard('admin')->user();
+        $this->authorizeForUser($user,$admin);
         $data = $this->validate($request,[
             'name'=>'required|min:3',
             'password'=>'nullable|min:5|confirmed',
             'avatar'=>'nullable|image',
         ]);
-
 
         $admin = Admin::findOrFail($id);
         if (isset($data['avatar'])) {

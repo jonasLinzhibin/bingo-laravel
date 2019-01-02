@@ -28,7 +28,15 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'permission5 articles','guard_name' => 'admin']);
 
         // 创建角色并赋予已创建的权限
+        $role = Role::create(['name' => 'superadmin','guard_name' => 'admin']);
+        $role->givePermissionTo('publish articles');
+        $role->givePermissionTo('unpublish articles');
+
         $role = Role::create(['name' => 'adminer','guard_name' => 'admin']);
+        $role->givePermissionTo('publish articles');
+        $role->givePermissionTo('unpublish articles');
+
+        $role = Role::create(['name' => 'editor','guard_name' => 'admin']);
         $role->givePermissionTo('publish articles');
         $role->givePermissionTo('unpublish articles');
 

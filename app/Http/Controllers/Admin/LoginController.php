@@ -23,12 +23,6 @@ class LoginController extends Controller
     public function __construct()
     {
     }
-    /**
-     * 重写登陆页面
-     */
-    public function showLoginForm(){
-        return view('admin.login.index');
-    }
 
     /**
      * 重写guard认证
@@ -37,6 +31,34 @@ class LoginController extends Controller
     protected function guard()
     {
         return auth()->guard('admin');
+    }
+    /**
+     * 重写登陆页面
+     */
+    public function showLoginForm(){
+        return view('admin.login.index');
+    }
+    /**
+     * 重写登录
+     * @param Request $request
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**

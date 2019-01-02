@@ -18,7 +18,6 @@ class DashboardController extends Controller
         $sys = new Sysinfo();
         $sysinfos = $sys->info();
 
-
         $user = new User();
         $posts = new Posts();
         $admins = new Admin();
