@@ -106,7 +106,7 @@ class AdminsController extends Controller
     {
         $admin = Admin::findOrFail($id);
         $user = auth()->guard('admin')->user();
-        $this->authorizeForUser($user,$admin);
+        $this->authorizeForUser($user,'update',$admin);
         $data = $this->validate($request,[
             'name'=>'required|min:3',
             'password'=>'nullable|min:5|confirmed',

@@ -18,10 +18,7 @@ class AdminsPolicy
     {
     }
     public function update(Admin $admin, Admin $model)
-    {
-        if($admin->is_super){
-            return true;
-        }
-        return $admin->id == $model->id;
+    { 
+        return $admin->is_super || $admin->id == $model->id;
     }
 }
