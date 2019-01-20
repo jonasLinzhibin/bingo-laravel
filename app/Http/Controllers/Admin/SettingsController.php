@@ -110,7 +110,7 @@ class SettingsController extends Controller
 
         $data = Settings::findOrFail($id);
         if($data->key != $input['key']){
-            Setting::forget($input['key']);
+            \Setting::forget($input['key']);
         }
         $data->group = $input['group'];
         $data->key = $input['key'];
