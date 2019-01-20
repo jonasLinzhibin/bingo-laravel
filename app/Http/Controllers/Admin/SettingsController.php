@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Kris\LaravelFormBuilder\Form;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class SettingsController extends Controller
 {
@@ -22,11 +24,19 @@ class SettingsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Kris\LaravelFormBuilder\FormBuilder  $formBuilder
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(FormBuilder $formBuilder)
     {
-        return view('admin.settings.create');
+
+        $form = $formBuilder->create('App\Forms\GeneralForm', [
+            'method' => 'POST',
+            'url' => route('config.store'),
+            'role=' => 'form',
+        ], ['form_type' => 'setting']);
+
+        return view('admin.settings.create', compact('form'));
     }
 
     /**
@@ -38,13 +48,14 @@ class SettingsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request,[
+            'group'=>'required',
             'key'=>'required|unique:settings',
             'value' => 'required',
             'description' => 'required',
             'status' => 'required',
         ]);
         Settings::create($data);
-        Setting::get($data['key'], $data['value']);
+        \Setting::get($data['key'], $data['value']);
         session()->flash('success','添加成功');
         return redirect()->route('config.index');
     }
@@ -63,13 +74,21 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Kris\LaravelFormBuilder\FormBuilder  $formBuilder
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, FormBuilder $formBuilder)
     {
         $setting = Settings::findOrFail($id);
-        return view('admin.settings.edit',compact(['setting']));
+
+        $form = $formBuilder->create('App\Forms\GeneralForm', [
+            'method' => 'POST',
+            'url' => route('config.update',$setting),
+            'model' => $setting,
+        ], ['form_type'=>'setting', 'method_field'=>'PUT']);
+
+        return view('admin.settings.edit',compact(['setting','form']));
     }
 
     /**
@@ -82,6 +101,7 @@ class SettingsController extends Controller
     public function update(Request $request,$id)
     {
         $input = $this->validate($request,[
+            'group'=>'required',
             'key'=>'required',
             'value' => 'required',
             'description' => 'required',
@@ -92,6 +112,7 @@ class SettingsController extends Controller
         if($data->key != $input['key']){
             Setting::forget($input['key']);
         }
+        $data->group = $input['group'];
         $data->key = $input['key'];
         $data->value = $input['value'];
         $data->description = $input['description'];

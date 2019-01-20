@@ -182,6 +182,7 @@ return [
         AetherUpload\AetherUploadServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Akaunting\Setting\Provider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
     ],
 
     /*
@@ -233,6 +234,7 @@ return [
         'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Setting' => Akaunting\Setting\Facade::class,
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
     ],
 
 ];

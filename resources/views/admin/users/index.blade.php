@@ -3,6 +3,28 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
+            <div class="box box-primary">
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" placeholder="请输入关键字查询">
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" placeholder="请输入关键字查询">
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" placeholder="请输入关键字查询">
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="submit" class="btn btn-success" value="查询">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">用户列表</h3>
@@ -14,6 +36,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">

@@ -36,6 +36,7 @@ return [
 	'database' => [
         'connection'    => null,
         'table'         => 'settings',
+        'group'         => 'group',
         'key'           => 'key',
         'value'         => 'value',
         'description'   => 'description',

@@ -9,6 +9,7 @@
         "akaunting/setting": "^1.0",
         "caouecs/laravel-lang": "~3.0",
         "fideloper/proxy": "~3.3",
+        "kris/laravel-form-builder": "^1.16",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelnews/laravel-twbs4": "^1.3",

@@ -88,6 +88,8 @@ class AdminsController extends Controller
      */
     public function edit(Admin $admin)
     {
+        $user = auth()->guard('admin')->user();
+        $this->authorizeForUser($user,'update',$admin);
         $roles = Role::all();
         //$admin->getFirstMediaUrl('avatar');
 
